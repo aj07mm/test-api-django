@@ -4,12 +4,13 @@ How to run:
 
 ```
 docker-compose up -d
+docker-compose run delivery_hero python manage.py migrate
 docker-compose run delivery_hero python manage.py loaddata init.json
 ```
 
 login:
 
-	username: admin@admin.com
+	username: admin
 	password: 123
 
 ---
