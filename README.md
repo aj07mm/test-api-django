@@ -7,6 +7,13 @@ docker-compose up -d
 docker-compose run delivery_hero python manage.py loaddata init.json
 ```
 
+login:
+
+	username: admin@admin.com
+	password: 123
+
+---
+
 Requirements:
 
 
