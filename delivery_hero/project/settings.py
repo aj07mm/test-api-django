@@ -336,3 +336,4 @@ CORS_ORIGIN_WHITELIST = (
 # SITE_URL = "https://localhost"
 # ########## END SITE CONFIGURATION
 
+ALLOWED_HOSTS = ['*']
