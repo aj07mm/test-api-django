@@ -18,3 +18,19 @@ build
 # Celerybeat scheduler file:
 celerybeat-schedule
 ENV
+
+.idea/
+.ropeproject/
+__pycache__/
+*.pyc
+.DS_Store
+.DS_Store?
+.tags
+.tags_swap
+.tags*
+tags
+.cache
+.vscode/
+.happypack/
+celerybeat-schedule
+celerybeat-schedule.*
