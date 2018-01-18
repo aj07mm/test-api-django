@@ -198,10 +198,10 @@ DJANGO_APPS = (
 )
 
 THIRD_PARTY_APPS = (
-    
+
     # REST
     'rest_framework',
-    
+
     # Auth
     'oauth2_provider',
 
@@ -211,7 +211,7 @@ THIRD_PARTY_APPS = (
 )
 
 LOCAL_APPS = (
-
+    'project.apps.restaurants',
 )
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
@@ -220,9 +220,15 @@ INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 
 ########## REST FRAMEWORK CONFIGURATION
 REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASSES': (
-        'oauth2_provider.ext.rest_framework.OAuth2Authentication',
-    )
+    'DEFAULT_PERMISSION_CLASSES': (
+    # 'rest_framework.permissions.IsAdminUser',
+        'rest_framework.permissions.AllowAny',
+    ),
+    # 'DEFAULT_AUTHENTICATION_CLASSES': (
+    #     'rest_framework.authentication.SessionAuthentication',
+    #     'rest_framework.authentication.TokenAuthentication',
+    # ),
+    'PAGE_SIZE': 9999
 }
 ########## END REST FRAMEWORK CONFIGURATION
 
@@ -317,9 +323,9 @@ CORS_ORIGIN_WHITELIST = (
 
 
 # ########## SSL CONFIGURATION
-# 
+#
 # Disable by load balancer
-# 
+#
 # SESSION_COOKIE_SECURE = True
 # SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTOCOL', 'https')
 # CSRF_COOKIE_SECURE = True

@@ -12,4 +12,7 @@ RUN apt-get -y update && apt-get -y autoremove
 
 WORKDIR /django
 
+#COPY ./docker-entrypoint.sh /django
+#ENTRYPOINT ["/docker-entrypoint.sh"]
+
 EXPOSE 8000
