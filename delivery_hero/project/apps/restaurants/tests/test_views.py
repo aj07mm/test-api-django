@@ -1,16 +1,13 @@
-from datetime import date, timedelta, datetime
-from django.test import TestCase
-from django.core.urlresolvers import reverse
+from datetime import datetime
 
 from rest_framework import status
 from rest_framework.test import APITestCase
 from rest_framework.test import APIRequestFactory
-from rest_framework.test import APIClient
 
 from . import factories
 
 
-class RestaurantTests(APITestCase):
+class RestaurantViewsetTests(APITestCase):
 
     """
     Testing viewset default methods
@@ -28,7 +25,7 @@ class RestaurantTests(APITestCase):
     def setUpTestData(cls):
         cls.client = APIRequestFactory()
         cls.headers = {'content-type': 'application/json'}
-        cls.random_date = datetime(2016, 8, 4)
+        cls.random_date = datetime(2016, 8, 4, 7, 0, 0, 0)
         cls.restaurant = factories.RestaurantFactory.build(
             name='Julio',
             opens_at=cls.random_date,
@@ -42,21 +39,27 @@ class RestaurantTests(APITestCase):
             headers=self.headers,
         )
         self.assertEqual(response.data[0]['name'], 'Julio')
-        #self.assertEqual(response.data[0]['opens_at'], self.random_date.isoformat())
-        #self.assertEqual(response.data[0]['closes_at'], self.random_date)
+        self.assertEqual(
+            response.data[0]['opens_at'], self.random_date.isoformat())
+        self.assertEqual(
+            response.data[0]['closes_at'], self.random_date.isoformat())
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
     def test_create_address(self):
         response = self.client.post(
             '/api/restaurants/',
             {
-                'name':'Allie',
+                'name': 'Allie',
                 'opens_at': self.random_date,
                 'closes_at': self.random_date,
             },
             headers=self.headers,
         )
         self.assertEqual(response.data['name'], 'Allie')
+        self.assertEqual(
+            response.data['opens_at'], self.random_date.isoformat())
+        self.assertEqual(
+            response.data['closes_at'], self.random_date.isoformat())
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
 
     def test_retrive_address(self):
@@ -65,6 +68,10 @@ class RestaurantTests(APITestCase):
             headers=self.headers,
         )
         self.assertEqual(response.data['name'], 'Julio')
+        self.assertEqual(
+            response.data['opens_at'], self.random_date.isoformat())
+        self.assertEqual(
+            response.data['closes_at'], self.random_date.isoformat())
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
     def test_update_address(self):
@@ -72,8 +79,6 @@ class RestaurantTests(APITestCase):
             '/api/restaurants/1/',
             {
                 'name': 'Jose',
-                'opens_at': datetime.now(),
-                'closes_at': datetime.now(),
             },
             headers=self.headers,
         )
@@ -83,10 +88,14 @@ class RestaurantTests(APITestCase):
     def test_partial_update_address(self):
         response = self.client.put(
             '/api/restaurants/1/',
-            { 'name': 'Jose2'},
+            {'name': 'Jose2'},
             headers=self.headers,
         )
         self.assertEqual(response.data['name'], 'Jose2')
+        self.assertEqual(
+            response.data['opens_at'], self.random_date.isoformat())
+        self.assertEqual(
+            response.data['closes_at'], self.random_date.isoformat())
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
     def test_destroy_address(self):

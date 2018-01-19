@@ -32,5 +32,6 @@ tags
 .cache
 .vscode/
 .happypack/
+debug.log
 celerybeat-schedule
 celerybeat-schedule.*

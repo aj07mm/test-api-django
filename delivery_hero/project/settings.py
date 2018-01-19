@@ -36,17 +36,6 @@ TEST_RUNNER = 'django.test.runner.DiscoverRunner'
 ########## END DEBUG CONFIGURATION
 
 
-########## MANAGER CONFIGURATION
-# See: https://docs.djangoproject.com/en/dev/ref/settings/#admins
-ADMINS = (
-    ('Yannik Messerli', 'yannik.messerli@gmail.com'),
-)
-
-# See: https://docs.djangoproject.com/en/dev/ref/settings/#managers
-MANAGERS = ADMINS
-########## END MANAGER CONFIGURATION
-
-
 ########## DATABASE CONFIGURATION
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#databases
 DATABASES = {
@@ -79,7 +68,7 @@ USE_I18N = True
 USE_L10N = True
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#use-tz
-USE_TZ = True
+USE_TZ = False
 ########## END GENERAL CONFIGURATION
 
 
@@ -138,8 +127,6 @@ TEMPLATES = [
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
-                # Insert your TEMPLATE_CONTEXT_PROCESSORS here or use this
-                # list if you haven't customized them:
                 'django.contrib.auth.context_processors.auth',
                 'django.template.context_processors.debug',
                 'django.template.context_processors.i18n',
@@ -167,8 +154,6 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
 
-    # CORS
-    'corsheaders.middleware.CorsMiddleware',
 )
 ########## END MIDDLEWARE CONFIGURATION
 
@@ -198,16 +183,7 @@ DJANGO_APPS = (
 )
 
 THIRD_PARTY_APPS = (
-
-    # REST
     'rest_framework',
-
-    # Auth
-    'oauth2_provider',
-
-    # CORS
-    'corsheaders',
-
 )
 
 LOCAL_APPS = (
@@ -224,8 +200,7 @@ REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': (
         'rest_framework.permissions.AllowAny',
     ),
-    'DATETIME_FORMAT': "%Y-%m-%dT%H:%M:%S.%f",
-    'PAGE_SIZE': 9999
+    'PAGE_SIZE': 50
 }
 ########## END REST FRAMEWORK CONFIGURATION
 

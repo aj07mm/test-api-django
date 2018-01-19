@@ -1,18 +1,14 @@
-FROM python:latest
+FROM python:3.6
 ENV LANG C.UTF-8
 
 RUN mkdir /django
 
 RUN apt-get -y update
-RUN apt-get install -y python python-pip python-dev python-psycopg2 postgresql-client
+RUN apt-get install -y python-psycopg2
 
 ADD requirements.txt /django/requirements.txt
 RUN pip install -r /django/requirements.txt
-RUN apt-get -y update && apt-get -y autoremove
 
 WORKDIR /django
-
-#COPY ./docker-entrypoint.sh /django
-#ENTRYPOINT ["/docker-entrypoint.sh"]
 
 EXPOSE 8000
