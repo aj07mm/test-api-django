@@ -8,6 +8,11 @@ docker-compose run delivery_hero python manage.py migrate
 docker-compose run delivery_hero python manage.py loaddata init.json
 ```
 
+Running tests:
+```
+docker-compose run delivery_hero python manage.py test
+```
+
 login:
 
 	username: admin

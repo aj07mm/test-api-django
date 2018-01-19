@@ -211,6 +211,7 @@ THIRD_PARTY_APPS = (
 )
 
 LOCAL_APPS = (
+    #'project.apps.restaurants',
     'project.apps.restaurants',
 )
 
@@ -221,13 +222,9 @@ INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 ########## REST FRAMEWORK CONFIGURATION
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': (
-    # 'rest_framework.permissions.IsAdminUser',
         'rest_framework.permissions.AllowAny',
     ),
-    # 'DEFAULT_AUTHENTICATION_CLASSES': (
-    #     'rest_framework.authentication.SessionAuthentication',
-    #     'rest_framework.authentication.TokenAuthentication',
-    # ),
+    'DATETIME_FORMAT': "%Y-%m-%dT%H:%M:%S.%f",
     'PAGE_SIZE': 9999
 }
 ########## END REST FRAMEWORK CONFIGURATION
