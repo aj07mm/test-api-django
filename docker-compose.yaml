@@ -5,6 +5,7 @@ database:
         - pgdata:/var/lib/postgresql/data/
     environment:
         POSTGRES_USER: django
+        PGHOST: database
 test_api_django:
     build: ./test_api_django
     restart: always
