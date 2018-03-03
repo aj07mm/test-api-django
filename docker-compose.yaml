@@ -7,7 +7,7 @@ database:
         POSTGRES_USER: django
 test_api_django:
     build: ./test_api_django
-    restart: always
+    # restart: always
     command: python manage.py runserver 0.0.0.0:8000
     volumes:
         - ./test_api_django:/django

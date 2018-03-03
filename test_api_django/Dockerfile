@@ -4,7 +4,7 @@ ENV LANG C.UTF-8
 RUN mkdir /django
 
 RUN apt-get -y update
-RUN apt-get install -y python-psycopg2
+RUN apt-get install -y python-psycopg2 postgresql-contrib
 
 ADD requirements.txt /django/requirements.txt
 RUN pip install -r /django/requirements.txt

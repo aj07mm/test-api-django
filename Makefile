@@ -12,4 +12,7 @@ stop:
 	docker-compose stop
 test:
 	docker-compose run test_api_django python manage.py test
-
+manage:
+	docker-compose run test_api_django python manage.py ${args}
+cmd:
+	docker-compose run test_api_django ${args}

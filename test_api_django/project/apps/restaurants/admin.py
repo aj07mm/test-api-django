@@ -5,6 +5,10 @@ from project.apps.restaurants.models import (
     Profile,
 )
 
+
+class ProfileAdmin(admin.ModelAdmin):
+    readonly_fields = ('uuid',)
+
+admin.site.register(Profile, ProfileAdmin)
 admin.site.register(Topic)
-# admin.site.register(User)
-admin.site.register(Profile)
+#admin.site.register(Profile)
