@@ -38,11 +38,10 @@ class RestaurantViewsetTests(APITestCase):
             '/api/restaurants/',
             headers=self.headers,
         )
-        self.assertEqual(response.data[0]['name'], 'Julio')
-        self.assertEqual(
-            response.data[0]['opens_at'], self.random_date.isoformat())
-        self.assertEqual(
-            response.data[0]['closes_at'], self.random_date.isoformat())
+        results = response.data['results']
+        self.assertEqual(results[0]['name'], 'Julio')
+        self.assertEqual(results[0]['opens_at'], self.random_date.isoformat())
+        self.assertEqual(results[0]['closes_at'], self.random_date.isoformat())
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
     def test_create_address(self):
