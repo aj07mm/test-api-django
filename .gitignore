@@ -35,3 +35,4 @@ tags
 debug.log
 celerybeat-schedule
 celerybeat-schedule.*
+.pytest_cache
