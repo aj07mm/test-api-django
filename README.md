@@ -5,12 +5,13 @@
 How to run:
 
 ```
-bash docker-build.sh
+make setup
+make run
 ```
 
 Running tests:
 ```
-docker-compose run test_api_django python manage.py test
+make test
 ```
 
 login:
