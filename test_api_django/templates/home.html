@@ -1,0 +1,8 @@
+{% extends 'base.html' %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+  <h2>Home</h2>
+  <p><a href="{% url 'profile_detail' profile_id=user.profile.uuid %}">My profile ({{ user.profile.uuid }})</a></p>
+{% endblock %}

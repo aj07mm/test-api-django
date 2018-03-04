@@ -2,11 +2,11 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>{% block title %}Django Simple Login{% endblock %}</title>
+  <title>{% block title %}mini-project-code-challenge{% endblock %}</title>
 </head>
 <body>
   <header>
-    <h1>Django Simple Login</h1>
+    <h1>mini-project-code-challenge</h1>
     {% if user.is_authenticated %}
       Hi {{ user.username }}!
       <a href="{% url 'logout' %}">logout</a>

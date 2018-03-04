@@ -8,8 +8,14 @@ admin.autodiscover()
 
 
 urlpatterns = (
-    url(r'^$', RedirectView.as_view(url='/api')),
+    url(r'^$', RedirectView.as_view(url='/home')),
+    url(r'^home/$', views.Home.as_view(), name='home'),
     url(r'^signup/$', views.signup, name='signup'),
+    url(
+        r'^profiles/(?P<profile_id>[0-9a-f-]+)/$',
+        views.ProfileDetail.as_view(),
+        name='profile_detail'
+    ),
     url(r'^login/$', auth_views.login, name='login'),
     url(r'^logout/$', auth_views.logout, name='logout'),
     url(r'^admin/', admin.site.urls),
