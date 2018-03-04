@@ -3,6 +3,7 @@ from django.conf.urls import include, url
 from django.contrib.auth import views as auth_views
 from django.views.generic import RedirectView
 from project.apps.restaurants import views
+from django.contrib.auth.decorators import login_required
 
 admin.autodiscover()
 
@@ -13,7 +14,7 @@ urlpatterns = (
     url(r'^signup/$', views.signup, name='signup'),
     url(
         r'^profiles/(?P<profile_id>[0-9a-f-]+)/$',
-        views.ProfileDetail.as_view(),
+        login_required(views.ProfileDetail.as_view()),
         name='profile_detail'
     ),
     url(r'^login/$', auth_views.login, name='login'),

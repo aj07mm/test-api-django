@@ -10,6 +10,7 @@ from project.apps.restaurants.models import Profile
 from project.pagination import BasePaginator
 from django.views.generic import TemplateView
 from django.http import HttpResponseForbidden, HttpResponseRedirect
+from django.core.urlresolvers import reverse
 
 
 class RestaurantViewSet(viewsets.ModelViewSet):
@@ -63,10 +64,11 @@ def signup(request):
             raw_password = user_form.cleaned_data.get('password1')
             user = authenticate(username=username, password=raw_password)
             # profile_form
-            user_form.save()
+            profile_form = ProfileForm(request.POST, instance=user.profile)
+            profile_form.save()
             # login and redirect
             login(request, user)
-            return redirect('/')
+            return HttpResponseRedirect(reverse('profile_detail', args=[user.profile.uuid]))
     else:
         user_form = UserCreationForm()
         profile_form = ProfileForm()
