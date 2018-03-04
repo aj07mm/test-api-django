@@ -17,6 +17,11 @@ urlpatterns = (
         login_required(views.ProfileDetail.as_view()),
         name='profile_detail'
     ),
+    url(
+        r'^profiles/$',
+        login_required(views.Profiles.as_view()),
+        name='profiles'
+    ),
     url(r'^login/$', auth_views.login, name='login'),
     url(r'^logout/$', auth_views.logout, name='logout'),
     url(r'^admin/', admin.site.urls),

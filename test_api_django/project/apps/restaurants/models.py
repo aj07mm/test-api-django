@@ -24,6 +24,9 @@ class Profile(models.Model):
     about_you = models.TextField(max_length=255, blank=True)
     topics = models.ManyToManyField(Topic, blank=False, related_name='topics')
 
+    def get_full_name(self):
+        return self.first_name + ' ' + self.last_name
+
 
 @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):

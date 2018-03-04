@@ -25,6 +25,13 @@ class RestaurantViewSet(viewsets.ModelViewSet):
 class Home(TemplateView):
     template_name = "home.html"
 
+class Profiles(TemplateView):
+    template_name = "registration/profiles.html"
+
+    def get_context_data(self, **kwargs):
+        return {
+            'profiles': Profile.objects.all(),
+        }
 
 class ProfileDetail(TemplateView):
     template_name = "registration/profile.html"
