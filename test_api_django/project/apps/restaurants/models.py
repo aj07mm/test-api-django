@@ -12,16 +12,17 @@ class Restaurant(models.Model):
 
 
 class Topic(models.Model):
-    name = models.CharField(max_length=30, blank=True)
+    name = models.CharField(max_length=12, blank=True)
 
 
 class Profile(models.Model):
     uuid = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False, unique=True)
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    name = models.CharField(max_length=30, blank=True)
-    position = models.CharField(max_length=40, blank=True)
-    description = models.TextField(max_length=500, blank=True)
-    topics = models.ManyToManyField(Topic, related_name='topics')
+    first_name = models.CharField(max_length=30, blank=True)
+    last_name = models.CharField(max_length=30, blank=True)
+    current_position = models.CharField(max_length=64, blank=True)
+    about_you = models.TextField(max_length=255, blank=True)
+    topics = models.ManyToManyField(Topic, blank=False, related_name='topics')
 
 
 @receiver(post_save, sender=User)
