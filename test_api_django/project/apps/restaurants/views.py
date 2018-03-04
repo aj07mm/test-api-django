@@ -40,14 +40,12 @@ class ProfileDetail(TemplateView):
         id = kwargs.get('profile_id')
         if id:
             profile = get_object_or_404(Profile, pk=id)
-            self.profile = profile
-            if profile.user != self.request.user:
-                return HttpResponseForbidden()
+            profile_form = ProfileForm(instance=profile)
         else:
-            return HttpResponseForbidden()
+            profile_form = ProfileForm()
 
-        profile_form = ProfileForm(instance=profile)
         return {
+            'is_user_page': profile.user == self.request.user,
             'profile_form': profile_form,
         }
 

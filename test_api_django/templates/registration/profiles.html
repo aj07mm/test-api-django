@@ -16,7 +16,7 @@
                 <td>{{ profile.uuid }}</td>
                 <td>{{ profile.get_full_name }}</td>
                 <td>{{ profile.current_position }}</td>
-                <td><button>View profile</button></td>
+                <td><a href="{% url 'profile_detail' profile_id=profile.uuid %}" class="button">View profile</a></td>
             </tr>
         {% endfor %}
     </tbody>
