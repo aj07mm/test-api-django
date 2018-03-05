@@ -14,7 +14,7 @@ services:
             - "8000:8000"
         links:
             - database
-    #        - webapp
+            - webapp
         environment:
             DEBUG: "true"
             DATABASE_NAME: django
@@ -32,10 +32,10 @@ services:
         build:
             context: .
             dockerfile: ./docker_files/webapp/Dockerfile
-          #depends_on:
-          #      python
-          # command: ['npm', 'run', 'build']
+        command: node server.js 0.0.0.0:3000
         volumes:
             - ./test_api_django:/django
+        ports:
+            - "3000:3000"
 volumes:
     pgdata: {}
