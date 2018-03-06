@@ -6,9 +6,10 @@ var BundleTracker = require('webpack-bundle-tracker')
 module.exports = {
   context: __dirname,
   entry: [
-      'webpack-dev-server/client?http://localhost:3000',
-      'webpack/hot/only-dev-server',
-      './assets/js/index'
+      //'webpack-dev-server/client?http://localhost:3000',
+      //'webpack/hot/only-dev-server',
+      './assets/js/index.jsx',
+      //'./assets/js/index',
   ],
 
   output: {

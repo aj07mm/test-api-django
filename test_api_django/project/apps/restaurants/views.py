@@ -30,6 +30,7 @@ class Profiles(TemplateView):
 
     def get_context_data(self, **kwargs):
         return {
+            'bundle': 'profiles',
             'profiles': Profile.objects.all(),
         }
 
