@@ -1,15 +1,31 @@
 from django import forms
+from django.contrib.auth.models import User
+from django.contrib.auth.forms import UserCreationForm
 from project.apps.restaurants.models import Profile
 
-class ProfileForm(forms.ModelForm):
-    read_only = ('uuid',)
-
+class BaseForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
-        super(ProfileForm, self).__init__(*args, **kwargs)
-        for field in self.fields.values():
+        super(BaseForm, self).__init__(*args, **kwargs)
+        for field_name, field in self.fields.items():
             field.widget.attrs['class'] = 'u-full-width'
+
+
+class ProfileForm(BaseForm):
+    read_only = ('uuid',)
 
     class Meta:
         model = Profile
-        fields = ('first_name', 'last_name', 'current_position', 'about_you', 'topics')
+        fields = (
+            'first_name',
+            'last_name',
+            'current_position',
+            'about_you',
+            'topics',
+        )
         exclude = ['user', 'uuid']
+
+
+class UserForm(UserCreationForm, BaseForm):
+    class Meta:
+        model = User
+        fields = ("username", "password1", "password2")
