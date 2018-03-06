@@ -32,7 +32,7 @@ services:
         build:
             context: .
             dockerfile: ./docker_files/webapp/Dockerfile
-        command: node server.js 0.0.0.0:3000
+        command: node server.js
         volumes:
             - ./test_api_django:/django
         ports:
