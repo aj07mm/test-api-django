@@ -27,6 +27,6 @@ urlpatterns = (
     url(r'^admin/', admin.site.urls),
     url(
         r'^api/',
-        include('project.apps.restaurants.urls', namespace='restaurants')
+        include('project.apps.restaurants.api.urls', namespace='restaurants')
     ),
 )
