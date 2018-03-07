@@ -50,17 +50,22 @@ class ProfileViewsetTests(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
     def test_create_address(self):
+        # save new user
+        user = factories.UserFactory.build(username="vini")
+        user.save()
+        # save profile
         response = self.client.post(
             '/api/profiles/',
             {
-                'first_name': 'Julio',
+                'first_name': 'Vinicius',
                 'last_name': 'Marins',
                 'current_position': 'Engineer',
                 'about_you': 'I <3 Rio',
+                'user': user.id,
             },
             headers=self.headers,
         )
-        self.assertEqual(response.data['first_name'], 'Julio')
+        self.assertEqual(response.data['first_name'], 'Vinicius')
         self.assertEqual(response.data['last_name'], 'Marins')
         self.assertEqual(response.data['current_position'], 'Engineer')
         self.assertEqual(response.data['about_you'], 'I <3 Rio')
@@ -68,7 +73,7 @@ class ProfileViewsetTests(APITestCase):
 
     def test_retrive_address(self):
         response = self.client.get(
-            '/api/profiles/1/',
+            '/api/profiles/{}/'.format(self.profile.uuid),
             headers=self.headers,
         )
         self.assertEqual(response.data['first_name'], 'Julio')
@@ -78,28 +83,34 @@ class ProfileViewsetTests(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
     def test_update_address(self):
+        # save new user
+        user = factories.UserFactory.build(username="camila")
+        user.save()
+        # save profile
         response = self.client.put(
-            '/api/profiles/1/',
+            '/api/profiles/{}/'.format(self.profile.uuid),
             {
-                'first_name': 'Julio',
-                'last_name': 'Marins',
-                'current_position': 'Engineer',
-                'about_you': 'I <3 Rio',
+                'first_name': 'Camila',
+                'last_name': 'Wilson',
+                'current_position': 'Producer',
+                'about_you': 'I <3 SF',
+                'user': user.id,
             },
             headers=self.headers,
         )
-        self.assertEqual(response.data['first_name'], 'Julio')
-        self.assertEqual(response.data['last_name'], 'Marins')
-        self.assertEqual(response.data['current_position'], 'Engineer')
-        self.assertEqual(response.data['about_you'], 'I <3 Rio')
+        self.assertEqual(response.data['first_name'], 'Camila')
+        self.assertEqual(response.data['last_name'], 'Wilson')
+        self.assertEqual(response.data['current_position'], 'Producer')
+        self.assertEqual(response.data['about_you'], 'I <3 SF')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
     def test_partial_update_address(self):
-        response = self.client.put(
-            '/api/profiles/1/',
+        response = self.client.patch(
+            '/api/profiles/{}/'.format(self.profile.uuid),
             {'first_name': 'Marcelo'},
             headers=self.headers,
         )
+        print(response.data)
         self.assertEqual(response.data['first_name'], 'Marcelo')
         self.assertEqual(response.data['last_name'], 'Marins')
         self.assertEqual(response.data['current_position'], 'Engineer')
@@ -108,7 +119,7 @@ class ProfileViewsetTests(APITestCase):
 
     def test_destroy_address(self):
         response = self.client.delete(
-            '/api/profiles/1/',
+            '/api/profiles/{}/'.format(self.profile.uuid),
             headers=self.headers,
         )
         self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
