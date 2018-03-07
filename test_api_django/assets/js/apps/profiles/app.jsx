@@ -61,7 +61,13 @@ class Welcome extends React.Component {
                 </div>
             );
         }
-        return <h1>bar</h1>;
+        return (
+            <div className="container">
+                <div className="row">
+                    <img style={{width: "50%"}} className="two-third column" src="https://upload.wikimedia.org/wikipedia/commons/b/b1/Loading_icon.gif" />
+                </div>
+            </div>
+        );
     }
 }
 
