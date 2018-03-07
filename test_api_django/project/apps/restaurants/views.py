@@ -3,7 +3,6 @@ from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import render, redirect, get_object_or_404
 from rest_framework import viewsets
-from project.apps.restaurants.models import Restaurant
 from project.apps.restaurants.forms import ProfileForm, UserForm
 from project.apps.restaurants.models import Profile
 from project.pagination import BasePaginator

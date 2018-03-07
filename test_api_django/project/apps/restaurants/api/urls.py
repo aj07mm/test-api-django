@@ -3,6 +3,6 @@ from project.apps.restaurants.api import views
 
 
 router = routers.DefaultRouter()
-router.register(r'restaurants', views.RestaurantViewSet)
+router.register(r'profiles', views.ProfileViewSet)
 
 urlpatterns = router.urls

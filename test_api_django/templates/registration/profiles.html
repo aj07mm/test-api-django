@@ -1,24 +1,4 @@
 {% extends 'base.html' %}
 {% block content %}
 <div id="react-app"></div>
-<table class="u-full-width">
-    <thead>
-        <tr>
-            <th>uuid</th>
-            <th>full name</th>
-            <th>current_position</th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for profile in profiles %}
-            <tr>
-                <td>{{ profile.uuid }}</td>
-                <td>{{ profile.get_full_name }}</td>
-                <td>{{ profile.current_position }}</td>
-                <td><a href="{% url 'profile_detail' profile_id=profile.uuid %}" class="button">View profile</a></td>
-            </tr>
-        {% endfor %}
-    </tbody>
-</table>
 {% endblock %}

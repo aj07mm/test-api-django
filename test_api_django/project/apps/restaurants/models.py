@@ -5,12 +5,6 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 
 
-class Restaurant(models.Model):
-    name = models.CharField(max_length=256)
-    opens_at = models.DateTimeField(null=True)
-    closes_at = models.DateTimeField(null=True)
-
-
 class Topic(models.Model):
     name = models.CharField(max_length=12, blank=True)
 
