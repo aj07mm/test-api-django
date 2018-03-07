@@ -85,7 +85,7 @@ class RestaurantViewsetTests(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
     def test_partial_update_address(self):
-        response = self.client.put(
+        response = self.client.patch(
             '/api/restaurants/1/',
             {'name': 'Jose2'},
             headers=self.headers,
