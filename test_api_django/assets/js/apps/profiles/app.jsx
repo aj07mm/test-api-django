@@ -33,15 +33,6 @@ class Welcome extends React.Component {
 
             });
 
-            const doRequest = () => {
-                Axios.post('/api/profiles/', {})
-                .then((response) => {
-                    this.setState({
-                        results: response.data.results,
-                    });
-                });
-            }
-
             return (
                 <div>
                     <table className="u-full-width">
@@ -57,7 +48,6 @@ class Welcome extends React.Component {
                             { rows }
                         </tbody>
                     </table>
-                    <button onClick={ doRequest }></button>
                 </div>
             );
         }
