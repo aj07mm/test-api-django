@@ -288,6 +288,7 @@ WSGI_APPLICATION = 'wsgi.application'
 CORS_ORIGIN_WHITELIST = (
     '*'
 )
+ALLOWED_HOSTS = ['*']
 ########## END CORS CONFIGURATION
 
 ########## EMAIL CONFIGURATION
@@ -311,8 +312,6 @@ CORS_ORIGIN_WHITELIST = (
 # ########## SITE CONFIGURATION
 # SITE_URL = "https://localhost"
 # ########## END SITE CONFIGURATION
-
-ALLOWED_HOSTS = ['*']
 
 TEMPLATES = [
     {
@@ -349,3 +348,5 @@ WEBPACK_LOADER = {
         'CACHE': not DEBUG
     }
 }
+
+CSRF_COOKIE_NAME = 'miniproject-csrftoken-2'

@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% block content %}
     {% if is_user_page %}
+        <div id="react-app-profile"></div>
         <div class="container docs-example docs-example-forms">
             <form method="post">
                 {% csrf_token %}

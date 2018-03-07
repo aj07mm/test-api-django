@@ -8,7 +8,8 @@ module.exports = {
   entry: [
       'webpack-dev-server/client?http://localhost:3000',
       'webpack/hot/only-dev-server',
-      './assets/js/profiles/index.jsx',
+      './assets/js/helpers/index.jsx',
+      './assets/js/apps/profiles/index.jsx',
   ],
 
   output: {
@@ -31,8 +32,12 @@ module.exports = {
   },
 
   resolve: {
-    modulesDirectories: ['node_modules', 'bower_components'],
-    extensions: ['', '.js', '.jsx']
+    modulesDirectories: ['node_modules'],
+    extensions: ['', '.js', '.jsx'],
+    modules: [
+        path.join(__dirname, '/assets/js'),
+        path.join(__dirname, '/node_modules'),
+    ]
   },
 
   watch: false,

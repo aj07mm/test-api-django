@@ -1,5 +1,6 @@
-const React = require('react')
-const Axios = require('axios')
+const React = require('react');
+import Axios from '../../helpers/Axios';
+
 
 class Welcome extends React.Component {
 
@@ -32,20 +33,32 @@ class Welcome extends React.Component {
 
             });
 
+            const doRequest = () => {
+                Axios.post('/api/profiles/', {})
+                .then((response) => {
+                    this.setState({
+                        results: response.data.results,
+                    });
+                });
+            }
+
             return (
-                <table className="u-full-width">
-                    <thead>
-                        <tr>
-                            <th>uuid</th>
-                            <th>full name</th>
-                            <th>current_position</th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-						{ rows }
-                    </tbody>
-                </table>
+                <div>
+                    <table className="u-full-width">
+                        <thead>
+                            <tr>
+                                <th>uuid</th>
+                                <th>full name</th>
+                                <th>current_position</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            { rows }
+                        </tbody>
+                    </table>
+                    <button onClick={ doRequest }></button>
+                </div>
             );
         }
         return <h1>bar</h1>;
