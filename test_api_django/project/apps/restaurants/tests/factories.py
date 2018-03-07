@@ -1,7 +1,12 @@
 import factory
-from project.apps.restaurants.models import Restaurant
+from django.contrib.auth.models import User
+from project.apps.restaurants.models import Profile
 
 
-class RestaurantFactory(factory.Factory):
+class UserFactory(factory.Factory):
     class Meta:
-        model = Restaurant
+        model = User
+
+class ProfileFactory(factory.Factory):
+    class Meta:
+        model = Profile
