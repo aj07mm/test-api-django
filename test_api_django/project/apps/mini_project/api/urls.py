@@ -1,5 +1,5 @@
 from rest_framework import routers
-from project.apps.restaurants.api import views
+from project.apps.mini_project.api import views
 
 
 router = routers.DefaultRouter()

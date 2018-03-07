@@ -46,7 +46,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='profile',
             name='topics',
-            field=models.ManyToManyField(related_name='topics', to='restaurants.Topic'),
+            field=models.ManyToManyField(related_name='topics', to='mini_project.Topic'),
         ),
         migrations.AddField(
             model_name='profile',

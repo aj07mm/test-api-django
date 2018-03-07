@@ -1,5 +1,5 @@
 from django.contrib import admin
-from project.apps.restaurants.models import (
+from project.apps.mini_project.models import (
     Topic,
     User,
     Profile,

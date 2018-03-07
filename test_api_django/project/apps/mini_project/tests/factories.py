@@ -1,6 +1,6 @@
 import factory
 from django.contrib.auth.models import User
-from project.apps.restaurants.models import Profile
+from project.apps.mini_project.models import Profile
 
 
 class UserFactory(factory.Factory):

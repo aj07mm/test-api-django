@@ -191,8 +191,7 @@ THIRD_PARTY_APPS = (
 )
 
 LOCAL_APPS = (
-    #'project.apps.restaurants',
-    'project.apps.restaurants',
+    'project.apps.mini_project',
 )
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps

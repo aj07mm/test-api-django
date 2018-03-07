@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.conf.urls import include, url
 from django.contrib.auth import views as auth_views
 from django.views.generic import RedirectView
-from project.apps.restaurants import views
+from project.apps.mini_project import views
 from django.contrib.auth.decorators import login_required
 
 admin.autodiscover()
@@ -27,6 +27,6 @@ urlpatterns = (
     url(r'^admin/', admin.site.urls),
     url(
         r'^api/',
-        include('project.apps.restaurants.api.urls', namespace='restaurants')
+        include('project.apps.mini_project.api.urls', namespace='mini_project')
     ),
 )

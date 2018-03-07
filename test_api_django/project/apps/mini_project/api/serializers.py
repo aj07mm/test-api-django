@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from django.core.urlresolvers import reverse
-from project.apps.restaurants.models import Profile
+from project.apps.mini_project.models import Profile
 
 
 class ProfileSerializer(serializers.ModelSerializer):

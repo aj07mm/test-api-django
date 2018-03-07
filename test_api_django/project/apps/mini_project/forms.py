@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
-from project.apps.restaurants.models import Profile
+from project.apps.mini_project.models import Profile
 
 class BaseForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
