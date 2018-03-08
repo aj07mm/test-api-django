@@ -1,8 +1,6 @@
 import uuid
 from django.db import models
 from django.contrib.auth.models import User
-from django.db.models.signals import post_save
-from django.dispatch import receiver
 
 
 class Topic(models.Model):
@@ -39,13 +37,3 @@ class Profile(models.Model):
         common_topics = my_topics.filter(id__in=other_user_topics.values_list('id', flat=True))
         non_common_topics = other_user_topics.exclude(id__in=my_topics.values_list('id', flat=True))
         return list(common_topics) + list(non_common_topics)
-
-
-@receiver(post_save, sender=User)
-def create_user_profile(sender, instance, created, **kwargs):
-    if created:
-        Profile.objects.create(user=instance)
-
-@receiver(post_save, sender=User)
-def save_user_profile(sender, instance, **kwargs):
-    instance.profile.save()

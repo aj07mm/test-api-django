@@ -1,18 +1,15 @@
-from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login, authenticate
-from django.contrib.auth.forms import UserCreationForm
-from django.shortcuts import render, redirect, get_object_or_404
-from rest_framework import viewsets
+from django.shortcuts import render, get_object_or_404
 from project.apps.mini_project.forms import ProfileForm, UserForm
 from project.apps.mini_project.models import Profile
-from project.pagination import BasePaginator
 from django.views.generic import TemplateView
-from django.http import HttpResponseForbidden, HttpResponseRedirect
+from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
 
 
 class Home(TemplateView):
     template_name = "home.html"
+
 
 class Profiles(TemplateView):
     template_name = "registration/profiles.html"
@@ -22,6 +19,7 @@ class Profiles(TemplateView):
             'bundle': 'profiles',
             'profiles': Profile.objects.all(),
         }
+
 
 class ProfileDetail(TemplateView):
     template_name = "registration/profile.html"
@@ -46,7 +44,15 @@ class ProfileDetail(TemplateView):
         profile_form = ProfileForm(self.request.POST, instance=profile)
         if profile_form.is_valid():
             profile_form.save()
-        return render(request, self.template_name, {'profile_form': profile_form})
+
+        return render(
+            request,
+            self.template_name,
+            {
+                'profile_form': profile_form,
+            }
+        )
+
 
 def signup(request):
 
@@ -60,7 +66,9 @@ def signup(request):
             user = authenticate(username=username, password=raw_password)
             # login and redirect
             login(request, user)
-            return HttpResponseRedirect(reverse('profile_detail', args=[user.profile.uuid]))
+            return HttpResponseRedirect(
+                reverse('profile_detail', args=[user.profile.uuid])
+            )
     else:
         user_form = UserForm()
 

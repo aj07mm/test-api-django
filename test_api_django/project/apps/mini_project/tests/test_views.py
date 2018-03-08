@@ -32,14 +32,14 @@ class ProfileViewsetTests(APITestCase):
         cls.user.save()
         # save profile
         cls.profile = cls.user.profile
-        cls.profile.first_name='Julio',
-        cls.profile.last_name='Marins',
-        cls.profile.current_position='Engineer',
-        cls.profile.about_you='I <3 Rio',
+        cls.profile.first_name = 'Julio',
+        cls.profile.last_name = 'Marins',
+        cls.profile.current_position = 'Engineer',
+        cls.profile.about_you = 'I <3 Rio',
         cls.profile.save()
 
     def setUp(self):
-        res = self.client.force_login(self.user)
+        self.client.force_login(self.user)
 
     def test_list_address(self):
         response = self.client.get(

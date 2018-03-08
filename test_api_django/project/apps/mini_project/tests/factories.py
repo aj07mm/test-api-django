@@ -7,6 +7,7 @@ class UserFactory(factory.Factory):
     class Meta:
         model = User
 
+
 class ProfileFactory(factory.Factory):
     class Meta:
         model = Profile
