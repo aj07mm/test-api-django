@@ -2,7 +2,6 @@ from datetime import datetime
 
 from rest_framework import status
 from rest_framework.test import APITestCase
-from rest_framework.test import APIRequestFactory
 
 from . import factories
 
@@ -23,19 +22,24 @@ class ProfileViewsetTests(APITestCase):
     """
     @classmethod
     def setUpTestData(cls):
-        cls.client = APIRequestFactory()
         cls.headers = {'content-type': 'application/json'}
         cls.random_date = datetime(2016, 8, 4, 7, 0, 0, 0)
-        cls.user = factories.UserFactory.build()
-        cls.user.save()
-        cls.profile = factories.ProfileFactory.build(
-            first_name='Julio',
-            last_name='Marins',
-            current_position='Engineer',
-            about_you='I <3 Rio',
-            user=cls.user,
+        cls.user = factories.UserFactory.build(
+            username="foobar",
+            password="123",
+            is_superuser=True,
         )
+        cls.user.save()
+        # save profile
+        cls.profile = cls.user.profile
+        cls.profile.first_name='Julio',
+        cls.profile.last_name='Marins',
+        cls.profile.current_position='Engineer',
+        cls.profile.about_you='I <3 Rio',
         cls.profile.save()
+
+    def setUp(self):
+        res = self.client.force_login(self.user)
 
     def test_list_address(self):
         response = self.client.get(
@@ -53,6 +57,8 @@ class ProfileViewsetTests(APITestCase):
         # save new user
         user = factories.UserFactory.build(username="vini")
         user.save()
+        # delete profile
+        user.profile.delete()
         # save profile
         response = self.client.post(
             '/api/profiles/',
@@ -86,6 +92,8 @@ class ProfileViewsetTests(APITestCase):
         # save new user
         user = factories.UserFactory.build(username="camila")
         user.save()
+        # delete profile
+        user.profile.delete()
         # save profile
         response = self.client.put(
             '/api/profiles/{}/'.format(self.profile.uuid),
@@ -110,7 +118,6 @@ class ProfileViewsetTests(APITestCase):
             {'first_name': 'Marcelo'},
             headers=self.headers,
         )
-        print(response.data)
         self.assertEqual(response.data['first_name'], 'Marcelo')
         self.assertEqual(response.data['last_name'], 'Marins')
         self.assertEqual(response.data['current_position'], 'Engineer')
