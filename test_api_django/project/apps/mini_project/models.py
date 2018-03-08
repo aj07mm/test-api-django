@@ -26,6 +26,9 @@ class Profile(models.Model):
     about_you = models.TextField(max_length=255, blank=True)
     topics = models.ManyToManyField(Topic, blank=True, related_name='topics')
 
+    def __str__(self):
+        return u"%s - %s" % (self.uuid, self.get_full_name())
+
     def get_full_name(self):
         return self.first_name + ' ' + self.last_name
 
@@ -34,7 +37,7 @@ class Profile(models.Model):
         other_user_topics = profile.topics.all()
 
         common_topics = my_topics.filter(id__in=other_user_topics.values_list('id', flat=True))
-        non_common_topics = my_topics.exclude(id__in=other_user_topics.values_list('id', flat=True))
+        non_common_topics = other_user_topics.exclude(id__in=my_topics.values_list('id', flat=True))
         return list(common_topics) + list(non_common_topics)
 
 
