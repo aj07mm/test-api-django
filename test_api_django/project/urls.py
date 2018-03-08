@@ -20,7 +20,7 @@ urlpatterns = (
         r'^login/?$',
         auth_views.login,
         {
-            'template_name':'registration/login.html',
+            'template_name': 'registration/login.html',
             'authentication_form': MyAuthenticationForm
         },
         name="login"

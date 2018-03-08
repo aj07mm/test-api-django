@@ -34,6 +34,10 @@ class Profile(models.Model):
         my_topics = self.topics.all()
         other_user_topics = profile.topics.all()
 
-        common_topics = my_topics.filter(id__in=other_user_topics.values_list('id', flat=True))
-        non_common_topics = other_user_topics.exclude(id__in=my_topics.values_list('id', flat=True))
+        common_topics = my_topics.filter(
+            id__in=other_user_topics.values_list('id', flat=True)
+        )
+        non_common_topics = other_user_topics.exclude(
+            id__in=my_topics.values_list('id', flat=True)
+        )
         return list(common_topics) + list(non_common_topics)
