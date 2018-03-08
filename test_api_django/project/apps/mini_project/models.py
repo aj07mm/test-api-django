@@ -5,7 +5,7 @@ from django.core.exceptions import ValidationError
 
 
 class Topic(models.Model):
-    name = models.CharField(max_length=12, blank=True)
+    name = models.CharField(max_length=12, blank=False)
 
     def __str__(self):
         return u"%s" % self.name
@@ -18,11 +18,11 @@ class Profile(models.Model):
         editable=False,
         unique=True,
     )
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    first_name = models.CharField(max_length=30, blank=True)
-    last_name = models.CharField(max_length=30, blank=True)
-    current_position = models.CharField(max_length=64, blank=True)
-    about_you = models.TextField(max_length=255, blank=True)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, blank=False)
+    first_name = models.CharField(max_length=30, blank=False)
+    last_name = models.CharField(max_length=30, blank=False)
+    current_position = models.CharField(max_length=64, blank=False)
+    about_you = models.TextField(max_length=255, blank=False)
     topics = models.ManyToManyField(
         Topic,
         blank=False,
