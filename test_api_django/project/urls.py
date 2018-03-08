@@ -16,8 +16,6 @@ urlpatterns = (
 
     # registration
     url(r'^signup/$', views.signup, name='signup'),
-    # url(r'^login/$', auth_views.login, name='login'),
-
     url(
         r'^login/?$',
         auth_views.login,
@@ -43,7 +41,10 @@ urlpatterns = (
     url(
         r'^api/',
         login_required(
-            include('project.apps.mini_project.api.urls', namespace='mini_project')
+            include(
+                'project.apps.mini_project.api.urls',
+                namespace='mini_project'
+            )
         )
     ),
     url(r'^admin/', admin.site.urls),
