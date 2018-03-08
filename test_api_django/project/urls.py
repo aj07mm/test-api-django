@@ -11,7 +11,13 @@ admin.autodiscover()
 urlpatterns = (
     url(r'^$', RedirectView.as_view(url='/home')),
     url(r'^home/$', views.Home.as_view(), name='home'),
+
+    # registration
     url(r'^signup/$', views.signup, name='signup'),
+    url(r'^login/$', auth_views.login, name='login'),
+    url(r'^logout/$', auth_views.logout, name='logout'),
+
+    # profiles
     url(
         r'^profiles/(?P<profile_id>[0-9a-f-]+)/$',
         login_required(views.ProfileDetail.as_view()),
@@ -22,11 +28,11 @@ urlpatterns = (
         login_required(views.Profiles.as_view()),
         name='profiles'
     ),
-    url(r'^login/$', auth_views.login, name='login'),
-    url(r'^logout/$', auth_views.logout, name='logout'),
-    url(r'^admin/', admin.site.urls),
     url(
         r'^api/',
-        include('project.apps.mini_project.api.urls', namespace='mini_project')
+        login_required(
+            include('project.apps.mini_project.api.urls', namespace='mini_project')
+        )
     ),
+    url(r'^admin/', admin.site.urls),
 )
