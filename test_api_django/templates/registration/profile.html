@@ -41,6 +41,8 @@
         <ul>
             {% for topic in topics %}
                 <li>{{ topic.name }}</li>
+            {% empty  %}
+                <li>No items...</li>
             {% endfor %}
         </ul>
     {% endif %}
