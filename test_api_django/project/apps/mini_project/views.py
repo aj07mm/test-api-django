@@ -49,7 +49,9 @@ class ProfileDetail(TemplateView):
             request,
             self.template_name,
             {
+                'is_user_page': profile.user == self.request.user,
                 'profile_form': profile_form,
+                'topics': self.request.user.profile.get_topics_ordered(profile),
             }
         )
 

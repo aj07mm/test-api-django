@@ -1,6 +1,7 @@
 import uuid
 from django.db import models
 from django.contrib.auth.models import User
+from django.core.exceptions import ValidationError
 
 
 class Topic(models.Model):
@@ -22,7 +23,13 @@ class Profile(models.Model):
     last_name = models.CharField(max_length=30, blank=True)
     current_position = models.CharField(max_length=64, blank=True)
     about_you = models.TextField(max_length=255, blank=True)
-    topics = models.ManyToManyField(Topic, blank=True, related_name='topics')
+    topics = models.ManyToManyField(
+        Topic,
+        blank=False,
+        related_name='topics',
+    )
+
+    MAX_TOPICS = 6
 
     def __str__(self):
         return u"%s - %s" % (self.uuid, self.get_full_name())
@@ -41,3 +48,8 @@ class Profile(models.Model):
             id__in=my_topics.values_list('id', flat=True)
         )
         return list(common_topics) + list(non_common_topics)
+
+    def clean(self, *args, **kwargs):
+        if self.topics.count() > self.MAX_TOPICS:
+            raise ValidationError("You can't assign more than three regions")
+        super(Profile, self).clean(*args, **kwargs)
