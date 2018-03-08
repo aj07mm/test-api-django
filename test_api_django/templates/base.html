@@ -7,6 +7,14 @@
         <title>{% block title %}mini-project-code-challenge{% endblock %}</title>
         <link href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css" rel="stylesheet" type="text/css">
         <style>
+footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    color: white;
+    text-align: center;
+}
 .container {
   max-width: 800px; }
 .header {
@@ -259,8 +267,8 @@
             {% block content %}
             {% endblock %}
         </main>
-        <hr>
         <footer>
+        <hr>
         </footer>
         {% render_bundle 'main' %}
     </body>
