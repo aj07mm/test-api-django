@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.models import User
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from project.apps.mini_project.models import Profile
 
 class BaseForm(forms.ModelForm):
@@ -29,3 +29,10 @@ class UserForm(UserCreationForm, BaseForm):
     class Meta:
         model = User
         fields = ("username", "password1", "password2")
+
+
+class MyAuthenticationForm(AuthenticationForm):
+    def __init__(self, *args, **kwargs):
+        super(MyAuthenticationForm, self).__init__(*args, **kwargs)
+        for field_name, field in self.fields.items():
+            field.widget.attrs['class'] = 'u-full-width'

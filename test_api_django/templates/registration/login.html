@@ -3,9 +3,25 @@
 {% block title %}Login{% endblock %}
 
 {% block content %}
-  <form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Login</button>
-  </form>
+    <div class="container docs-example docs-example-forms">
+        <form method="post">
+            {% csrf_token %}
+            {% for field in form %}
+                <div class="row">
+                    <div class="u-full-width">
+                        {{ field.label_tag }}
+                        {{ field }}
+                        {% if field.help_text %}
+                            <small style="display: none">{{ field.help_text }}</small>
+                        {% endif %}
+                    </div>
+                </div>
+                <br>
+                {% for error in field.errors %}
+                    <p style="color: red">{{ error }}</p>
+                {% endfor %}
+            {% endfor %}
+            <button type="submit" class="u-full-width">Login</button>
+        </form>
+    </div>
 {% endblock %}
