@@ -29,13 +29,15 @@
                 </div>
                 <div class="row">
                     {{ profile_form.topics.errors }}
-                    <label for="{{ profile_form.topics.id_for_label }}">Current position:</label>
+                    <label for="{{ profile_form.topics.id_for_label }}">Topics:</label>
                     {{ profile_form.topics }}
                 </div>
                 <button type="submit" class="u-full-width">Update</button>
             </form>
         </div>
     {% else %}
+        <h5>Topics:</h5>
+        <br>
         <ul>
             {% for topic in topics %}
                 <li>{{ topic.name }}</li>
