@@ -52,11 +52,7 @@ class ProfileDetail(TemplateView):
         return render(
             request,
             self.template_name,
-            {
-                'is_user_page': profile.user == self.request.user,
-                'profile_form': profile_form,
-                'topics': self.request.user.profile.get_topics_ordered(profile),
-            }
+            self.get_context_data(**kwargs),
         )
 
 

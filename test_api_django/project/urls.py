@@ -29,12 +29,12 @@ urlpatterns = (
 
     # profiles
     url(
-        r'^profiles/(?P<profile_id>[0-9a-f-]+)/$',
+        r'^user/(?P<profile_id>[0-9a-f-]+)/$',
         login_required(views.ProfileDetail.as_view()),
         name='profile_detail'
     ),
     url(
-        r'^profiles/$',
+        r'^user/$',
         login_required(views.Profiles.as_view()),
         name='profiles'
     ),
