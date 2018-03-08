@@ -35,6 +35,13 @@
                 <button type="submit" class="u-full-width">Update</button>
             </form>
             {{ profile_form.non_field_errors }}
+            {% if messages %}
+                <ul class="messages">
+                    {% for message in messages %}
+                    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
         </div>
     {% else %}
         <h5>Topics:</h5>

@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.contrib.auth import login, authenticate
 from django.shortcuts import render, get_object_or_404
 from project.apps.mini_project.forms import ProfileForm, UserForm
@@ -24,6 +25,7 @@ class Profiles(TemplateView):
 
 class ProfileDetail(TemplateView):
     template_name = "registration/profile.html"
+    success_message = "was created successfully"
 
     def get_context_data(self, **kwargs):
         id = kwargs.get('profile_id')
@@ -45,6 +47,7 @@ class ProfileDetail(TemplateView):
         profile_form = ProfileForm(self.request.POST, instance=profile)
         if profile_form.is_valid():
             profile_form.save()
+            messages.success(request, 'Submission successful')
 
         return render(
             request,
