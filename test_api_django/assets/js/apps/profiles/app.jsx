@@ -2,7 +2,7 @@ const React = require('react');
 import Axios from '../../helpers/Axios';
 
 
-class Welcome extends React.Component {
+class Profiles extends React.Component {
 
     constructor(props){
         super(props);
@@ -65,4 +65,4 @@ class Welcome extends React.Component {
 }
 
 
-module.exports = Welcome
+module.exports = Profiles
