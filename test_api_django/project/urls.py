@@ -42,7 +42,7 @@ urlpatterns = (
         r'^api/',
         include(
             'project.apps.mini_project.api.urls',
-            namespace='mini_project'
+            namespace='api_profile'
         )
     ),
     url(r'^admin/', admin.site.urls),

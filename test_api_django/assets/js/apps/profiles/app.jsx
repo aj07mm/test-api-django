@@ -10,7 +10,10 @@ class Welcome extends React.Component {
     }
 
     componentDidMount() {
-        Axios.get('/api/profiles')
+        // get url
+        const app = document.getElementById('react-app-profiles');
+        // do request
+        Axios.get(app.getAttribute('data-url'))
         .then((response) => {
             this.setState({
                 results: response.data.results,

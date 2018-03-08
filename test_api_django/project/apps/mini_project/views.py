@@ -18,6 +18,7 @@ class Profiles(TemplateView):
         return {
             'bundle': 'profiles',
             'profiles': Profile.objects.all(),
+            'data_url': reverse('api_profile:profiles-list'),
         }
 
 
