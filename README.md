@@ -1,4 +1,4 @@
-# Test Api Django
+# Mini Project
 
 How to run:
 
