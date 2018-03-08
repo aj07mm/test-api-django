@@ -40,11 +40,9 @@ urlpatterns = (
     ),
     url(
         r'^api/',
-        login_required(
-            include(
-                'project.apps.mini_project.api.urls',
-                namespace='mini_project'
-            )
+        include(
+            'project.apps.mini_project.api.urls',
+            namespace='mini_project'
         )
     ),
     url(r'^admin/', admin.site.urls),

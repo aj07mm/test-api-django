@@ -11,12 +11,13 @@ from project.pagination import BasePaginator
 from django.views.generic import TemplateView
 from django.http import HttpResponseForbidden, HttpResponseRedirect
 from django.core.urlresolvers import reverse
+from rest_framework.permissions import IsAuthenticated
 
 
 class ProfileViewSet(viewsets.ModelViewSet):
-    """
-    A viewset for viewing and editing user instances.
-    """
+    permission_classes = (IsAuthenticated,)
+
     serializer_class = ProfileSerializer
     pagination_class = BasePaginator
     queryset = Profile.objects.all()
+

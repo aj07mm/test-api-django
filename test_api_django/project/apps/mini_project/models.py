@@ -28,3 +28,21 @@ class Profile(models.Model):
 
     def get_full_name(self):
         return self.first_name + ' ' + self.last_name
+
+    def get_topics_ordered(self, profile):
+        my_topics = self.topics.all()
+        other_user_topics = profile.topics.all()
+
+        common_topics = my_topics.filter(id__in=other_user_topics.values_list('id', flat=True))
+        non_common_topics = my_topics.exclude(id__in=other_user_topics.values_list('id', flat=True))
+        return list(common_topics) + list(non_common_topics)
+
+
+@receiver(post_save, sender=User)
+def create_user_profile(sender, instance, created, **kwargs):
+    if created:
+        Profile.objects.create(user=instance)
+
+@receiver(post_save, sender=User)
+def save_user_profile(sender, instance, **kwargs):
+    instance.profile.save()

@@ -37,7 +37,7 @@
         </div>
     {% else %}
         <ul>
-            {% for topic in user.profile.topics.all %}
+            {% for topic in topics %}
                 <li>{{ topic.name }}</li>
             {% endfor %}
         </ul>
