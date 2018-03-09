@@ -1,24 +1,41 @@
-database:
-    restart: always
-    image: postgres:latest
-    volumes:
-        - pgdata:/var/lib/postgresql/data/
-    environment:
-        POSTGRES_USER: django
-        PGHOST: database
-test_api_django:
-    build: ./test_api_django
-    restart: always
-    command: python manage.py runserver 0.0.0.0:8000
-    volumes:
-        - ./test_api_django:/django
-    ports:
-        - "8000:8000"
-    links:
-        - database
-    environment:
-        DEBUG: "true"
-        DATABASE_NAME: django
-        DATABASE_USER: django
-        DATABASE_PASSWORD: django
-        DATABASE_SERVICE_HOST: database
+version: '2'
+services:
+    django:
+        build:
+            context: .
+            dockerfile: ./docker_files/django/Dockerfile
+        # restart: always
+        command: python manage.py runserver 0.0.0.0:8000
+        stdin_open: true
+        tty: true
+        volumes:
+            - ./test_api_django:/django
+        ports:
+            - "8000:8000"
+        links:
+            - database
+            - webapp
+        environment:
+            DEBUG: "true"
+            DATABASE_NAME: django
+            DATABASE_USER: django
+            DATABASE_PASSWORD: django
+            DATABASE_SERVICE_HOST: database
+    database:
+        image: postgres:latest
+        restart: always
+        volumes:
+            - pgdata:/var/lib/postgresql/data/
+        environment:
+            POSTGRES_USER: django
+    webapp:
+        build:
+            context: .
+            dockerfile: ./docker_files/webapp/Dockerfile
+        command: node server.js
+        volumes:
+            - ./test_api_django:/django
+        ports:
+            - "3000:3000"
+volumes:
+    pgdata: {}
