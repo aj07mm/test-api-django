@@ -36,6 +36,7 @@ class ProfileDetail(TemplateView):
             profile_form = ProfileForm()
 
         return {
+            'profile': profile,
             'is_user_page': profile.user == self.request.user,
             'profile_form': profile_form,
             'topics': self.request.user.profile.get_topics_ordered(profile),

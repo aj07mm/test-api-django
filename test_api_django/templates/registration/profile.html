@@ -42,8 +42,9 @@
             {% endif %}
         </div>
     {% else %}
-        <h5>Topics:</h5>
-        <br>
+        <li><b>Full name:</b> {{ profile.get_full_name }}</li>
+        <li><b>Current position:</b> {{ profile.current_position }}</li>
+        <li><b>Topics:</b></li>
         <ul>
             {% for topic in topics %}
                 <li>{{ topic.name }}</li>
