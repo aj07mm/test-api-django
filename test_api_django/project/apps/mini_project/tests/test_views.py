@@ -2,7 +2,7 @@ import json
 from datetime import datetime
 
 from rest_framework import status
-from rest_framework.test import APITestCase, APIRequestFactory
+from rest_framework.test import APITestCase
 
 from . import factories
 
