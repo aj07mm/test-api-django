@@ -203,6 +203,11 @@ REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': (
         'rest_framework.permissions.AllowAny',
     ),
+    # Use application/json instead of multipart/form-data requests in tests.
+    'TEST_REQUEST_DEFAULT_FORMAT': 'json',
+    'TEST_REQUEST_RENDERER_CLASSES': (
+        'rest_framework.renderers.JSONRenderer',
+    ),
     'PAGE_SIZE': 50
 }
 ########## END REST FRAMEWORK CONFIGURATION
@@ -244,44 +249,10 @@ LOGGING = {
 }
 ########## END LOGGING CONFIGURATION
 
-
-########## CELERY CONFIGURATION
-# See: http://celery.readthedocs.org/en/latest/configuration.html#celery-task-result-expires
-# CELERY_TASK_RESULT_EXPIRES = timedelta(minutes=30)
-
-# # See: http://docs.celeryproject.org/en/master/configuration.html#std:setting-CELERY_CHORD_PROPAGATES
-# CELERY_CHORD_PROPAGATES = True
-
-# # See: http://celery.github.com/celery/django/
-# setup_loader()
-########## END CELERY CONFIGURATION
-
-
 ########## WSGI CONFIGURATION
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#wsgi-application
 WSGI_APPLICATION = 'wsgi.application'
 ########## END WSGI CONFIGURATION
-
-
-########## COMPRESSION CONFIGURATION
-# # See: http://django_compressor.readthedocs.org/en/latest/settings/#django.conf.settings.COMPRESS_ENABLED
-# COMPRESS_ENABLED = True
-
-# # See: http://django-compressor.readthedocs.org/en/latest/settings/#django.conf.settings.COMPRESS_CSS_HASHING_METHOD
-# COMPRESS_CSS_HASHING_METHOD = 'content'
-
-# # See: http://django_compressor.readthedocs.org/en/latest/settings/#django.conf.settings.COMPRESS_CSS_FILTERS
-# COMPRESS_CSS_FILTERS = [
-#     'compressor.filters.template.TemplateFilter',
-# ]
-
-# # See: http://django_compressor.readthedocs.org/en/latest/settings/#django.conf.settings.COMPRESS_JS_FILTERS
-# COMPRESS_JS_FILTERS = [
-#     'compressor.filters.template.TemplateFilter',
-# ]
-########## END COMPRESSION CONFIGURATION
-
-
 
 ########## CORS
 CORS_ORIGIN_WHITELIST = (
@@ -289,28 +260,6 @@ CORS_ORIGIN_WHITELIST = (
 )
 ALLOWED_HOSTS = ['*']
 ########## END CORS CONFIGURATION
-
-########## EMAIL CONFIGURATION
-# See: https://docs.djangoproject.com/en/dev/ref/settings/#email-backend
-# EMAIL_BACKEND = 'django_mailgun.MailgunBackend'
-# MAILGUN_ACCESS_KEY = 'key-c2ebfec48050f7c36bd1a9f8f59fd2e3'
-# MAILGUN_SERVER_NAME = 'mg.mappostcards.com'
-########## END EMAIL CONFIGURATION
-
-
-# ########## SSL CONFIGURATION
-#
-# Disable by load balancer
-#
-# SESSION_COOKIE_SECURE = True
-# SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTOCOL', 'https')
-# CSRF_COOKIE_SECURE = True
-# ########## END SSL CONFIGURATION
-
-
-# ########## SITE CONFIGURATION
-# SITE_URL = "https://localhost"
-# ########## END SITE CONFIGURATION
 
 TEMPLATES = [
     {
