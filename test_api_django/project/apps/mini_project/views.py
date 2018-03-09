@@ -49,10 +49,12 @@ class ProfileDetail(TemplateView):
             profile_form.save()
             messages.success(request, 'Submission successful')
 
+        context = self.get_context_data(**kwargs)
+        context['profile_form'] = profile_form
         return render(
             request,
             self.template_name,
-            self.get_context_data(**kwargs),
+            context,
         )
 
 

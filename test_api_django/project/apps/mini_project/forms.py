@@ -1,7 +1,8 @@
 from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
-from project.apps.mini_project.models import Profile
+from django.forms.widgets import CheckboxSelectMultiple
+from project.apps.mini_project.models import Profile, Topic
 
 
 class BaseForm(forms.ModelForm):
@@ -14,6 +15,13 @@ class BaseForm(forms.ModelForm):
 class ProfileForm(BaseForm):
     read_only = ('uuid',)
 
+    MAX_TOPICS = 6
+
+    def __init__(self, *args, **kwargs):
+        super(ProfileForm, self).__init__(*args, **kwargs)
+        #self.fields["topics"].widget = CheckboxSelectMultiple()
+        #self.fields["topics"].queryset = Topic.objects.all()
+
     class Meta:
         model = Profile
         fields = (
@@ -24,6 +32,15 @@ class ProfileForm(BaseForm):
             'topics',
         )
         exclude = ['user', 'uuid']
+
+    def clean_topics(self):
+        topics = self.cleaned_data['topics']
+        if topics.count() > self.MAX_TOPICS:
+            raise forms.ValidationError(
+                "Select a minimum of 1 and maximum of 6 topics"
+            )
+        return topics
+
 
 
 class UserForm(UserCreationForm, BaseForm):

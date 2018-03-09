@@ -29,8 +29,6 @@ class Profile(models.Model):
         related_name='topics',
     )
 
-    MAX_TOPICS = 6
-
     def __str__(self):
         return u"%s - %s" % (self.uuid, self.get_full_name())
 
@@ -48,8 +46,3 @@ class Profile(models.Model):
             id__in=my_topics.values_list('id', flat=True)
         )
         return list(common_topics) + list(non_common_topics)
-
-    def clean(self, *args, **kwargs):
-        if self.topics.count() > self.MAX_TOPICS:
-            raise ValidationError("You can't assign more than three regions")
-        super(Profile, self).clean(*args, **kwargs)
