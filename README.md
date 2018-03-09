@@ -1,6 +1,6 @@
 # Mini Project
 
-![](https://s3-us-west-2.amazonaws.com/aj07mm-public-files/Screen+Shot+2018-03-09+at+13.30.20.png)
+![](https://s3-us-west-2.amazonaws.com/aj07mm-public-files/Screen+Shot+2018-03-09+at+17.55.04.png)
 How to run:
 
 ```
