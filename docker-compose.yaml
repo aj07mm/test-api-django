@@ -35,6 +35,7 @@ services:
         command: node server.js
         volumes:
             - ./test_api_django:/django
+            - /django/node_modules
         ports:
             - "3000:3000"
 volumes:
