@@ -8,8 +8,8 @@ admin.autodiscover()
 urlpatterns = (
     url(r'^$', RedirectView.as_view(url='/api')),
     url(r'^admin/', admin.site.urls),
-    url(
-        r'^api/',
-        include('project.apps.restaurants.urls', namespace='restaurants')
-    ),
+    #url(
+    #    r'^api/',
+    #    include('project.apps.foobar.urls', namespace='foobar')
+    #),
 )

@@ -10,7 +10,7 @@ RUN curl -sL https://deb.nodesource.com/setup_9.x | bash -
 RUN apt-get install -y nodejs
 RUN apt-get install -y python-psycopg2 postgresql-contrib build-essential
 
-ADD test_api_django/requirements.txt /django/requirements.txt
+ADD requirements.txt /django/requirements.txt
 
 RUN pip install -r requirements.txt
 
