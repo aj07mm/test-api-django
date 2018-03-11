@@ -1,13 +1,10 @@
 import json
-from datetime import datetime
 
 from rest_framework import status
 from rest_framework.test import APITestCase
+from django.contrib.auth.models import Permission
 
 from . import factories
-
-from project.apps.motius.models import Article
-from django.contrib.auth.models import Permission
 
 
 class ProfileViewsetTests(APITestCase):
@@ -56,7 +53,6 @@ class ProfileViewsetTests(APITestCase):
 
     def setUp(self):
         self.client.force_login(self.user)
-
 
     def test_list_address_with_permission_for_name(self):
         self.add_permission('name', 'read')

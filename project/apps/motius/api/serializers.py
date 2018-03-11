@@ -1,8 +1,6 @@
-from django.urls import reverse
 from rest_framework import serializers
 from rest_framework.exceptions import ValidationError
 from project.apps.motius.models import Article
-
 
 
 class ArticleSerializer(serializers.ModelSerializer):
