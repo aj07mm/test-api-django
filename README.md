@@ -1,5 +1,7 @@
 # Motius
 
+![](https://s3-us-west-2.amazonaws.com/aj07mm-public-files/Screen+Shot+2018-03-11+at+20.38.50.png)
+
 How to run:
 
 ```
