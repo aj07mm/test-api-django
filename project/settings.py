@@ -45,7 +45,18 @@ DATABASES = {
         'USER': os.getenv('DATABASE_USER', 'user'),
         'PASSWORD': os.getenv('DATABASE_PASSWORD', 'password'),
         'HOST': os.getenv('DATABASE_SERVICE_HOST', 'database'),
-        'PORT': os.getenv('DATABASE_SERVICE_PORT', 5432)
+        'PORT': os.getenv('DATABASE_SERVICE_PORT', 5432),
+        'TEST': {
+            'NAME': os.getenv('DATABASE_NAME_TEST', 'db'),
+        },
+    },
+    'django_test': {
+        'ENGINE': os.getenv('DATABASE_ENGINE', 'django.db.backends.postgresql_psycopg2'),
+        'NAME': os.getenv('DATABASE_NAME_TEST', 'djang_test'),
+        'USER': os.getenv('DATABASE_USER', 'user'),
+        'PASSWORD': os.getenv('DATABASE_PASSWORD', 'password'),
+        'HOST': os.getenv('DATABASE_SERVICE_HOST', 'database'),
+        'PORT': os.getenv('DATABASE_SERVICE_PORT', 5432),
     }
 }
 ########## END DATABASE CONFIGURATION

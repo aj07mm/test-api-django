@@ -14,13 +14,15 @@ services:
             - "8000:8000"
         links:
             - database
-            #- webapp
         environment:
+            # default database
             DEBUG: "true"
             DATABASE_NAME: django
             DATABASE_USER: django
             DATABASE_PASSWORD: django
             DATABASE_SERVICE_HOST: database
+            # test database
+            DATABASE_NAME_TEST: django_test
     database:
         image: postgres:latest
         restart: always
@@ -28,14 +30,5 @@ services:
             - pgdata:/var/lib/postgresql/data/
         environment:
             POSTGRES_USER: django
-    #webapp:
-    #    build:
-    #        context: .
-    #        dockerfile: ./webapp/Dockerfile
-    #    command: node server.js
-    #    volumes:
-    #        - .:/django
-    #    ports:
-    #        - "3000:3000"
 volumes:
     pgdata: {}
