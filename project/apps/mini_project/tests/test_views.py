@@ -24,7 +24,6 @@ class ProfileViewsetTests(APITestCase):
     @classmethod
     def setUpTestData(cls):
         cls.headers = {'content-type': 'application/json'}
-        cls.random_date = datetime(2016, 8, 4, 7, 0, 0, 0)
         # save topic
         cls.topic = factories.TopicFactory.build()
         cls.topic.save()
