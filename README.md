@@ -1,4 +1,4 @@
-# Test Api Django
+# Motius
 
 How to run:
 
@@ -14,7 +14,12 @@ make test
 
 login:
 
+	# superuser
 	username: admin
+	password: 123
+
+	# staffuser
+	username: staff
 	password: 123
 
 ---
