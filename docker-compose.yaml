@@ -17,10 +17,13 @@ services:
             #- webapp
         environment:
             DEBUG: "true"
+            # default database
             DATABASE_NAME: django
             DATABASE_USER: django
             DATABASE_PASSWORD: django
             DATABASE_SERVICE_HOST: database
+            # test database
+            DATABASE_NAME_TEST: django_test
     database:
         image: postgres:latest
         restart: always
