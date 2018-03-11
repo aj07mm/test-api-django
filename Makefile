@@ -12,6 +12,8 @@ stop:
 	docker-compose stop
 test:
 	docker-compose run django python manage.py test
+dump_fixture:
+	docker-compose run django python manage.py dumpdata --format=json > fixtures/initial_data.json
 manage:
 	docker-compose run django python manage.py ${args}
 cmd:
