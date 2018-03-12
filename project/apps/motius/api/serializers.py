@@ -22,6 +22,7 @@ class ArticleSerializer(serializers.ModelSerializer):
         return ret
 
     def to_internal_value(self, request_data):
+        errors = {}
         # get the original representation
         ret = super(ArticleSerializer, self).to_representation(request_data)
         current_user = self.context['request'].user
@@ -29,8 +30,9 @@ class ArticleSerializer(serializers.ModelSerializer):
             if field_value and not current_user.has_perm(
                 'motius.change_{}_article'.format(field_name)
             ):
-                raise ValidationError({
-                    field_name: ["Field not allowed to change"]
-                })
+                errors[field_name] = ["Field not allowed to change"]
+
+        if errors:
+            raise ValidationError(errors)
 
         return ret
