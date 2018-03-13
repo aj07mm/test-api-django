@@ -133,7 +133,7 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-            # insert your TEMPLATE_DIRS here
+            normpath(join(SITE_ROOT, 'templates'))
         ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -166,6 +166,8 @@ MIDDLEWARE = (
     'django.contrib.messages.middleware.MessageMiddleware',
 
 )
+
+SESSION_ENGINE = "django.contrib.sessions.backends.signed_cookies"
 ########## END MIDDLEWARE CONFIGURATION
 
 
@@ -200,7 +202,7 @@ THIRD_PARTY_APPS = (
 )
 
 LOCAL_APPS = (
-    #'project.apps.foobar', <-- your app here
+    'project.apps.twyla',
 )
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
@@ -321,3 +323,5 @@ CORS_ORIGIN_WHITELIST = (
 # ########## END SITE CONFIGURATION
 
 ALLOWED_HOSTS = ['*']
+
+AUTH_USER_MODEL = 'twyla.User'

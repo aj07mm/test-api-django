@@ -34,7 +34,7 @@ services:
     #webapp:
     #    build:
     #        context: .
-    #        dockerfile: ./webapp/Dockerfile
+    #        dockerfile: ./docker_files/webapp/Dockerfile
     #    command: node server.js
     #    volumes:
     #        - .:/django
