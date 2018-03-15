@@ -1,1 +1,1 @@
-{"status":"error","error":"ModuleNotFoundError","message":"Module not found: Error: Cannot resolve 'file' or 'directory' ./assets/js/apps/profiles/index.jsx in /django"}
+{"status":"done","chunks":{"main":[{"name":"main-cf56141e6c12a05cf8e2.js","publicPath":"http://localhost:3000/assets/bundles/main-cf56141e6c12a05cf8e2.js","path":"/django/assets/bundles/main-cf56141e6c12a05cf8e2.js"}]}}

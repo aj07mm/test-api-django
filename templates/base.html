@@ -16,6 +16,8 @@
                     <ul class="navbar-list">
                         {% if user.is_authenticated %}
                             <li class="navbar-item"><a class="navbar-link" href="{% url 'logout' %}">Logout</a></li>
+                            <li class="navbar-item"><a class="navbar-link" href="{% url 'add_book' %}">Add Book</a></li>
+                            <li class="navbar-item"><a class="navbar-link" href="{% url 'add_rate' %}">Add Rate</a></li>
                         {% else %}
                             <li class="navbar-item"><a class="navbar-link" href="{% url 'login' %}">Login</a></li>
                         {% endif %}

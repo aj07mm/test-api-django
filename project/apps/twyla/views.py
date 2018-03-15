@@ -8,6 +8,21 @@ from project.apps.twyla.forms import LoginForm
 class Home(TemplateView):
     template_name = "home.html"
 
+
+class AddBook(TemplateView):
+    template_name = "add_book.html"
+
+    def get_context_data(self, **kwargs):
+        return {
+            'bundle': 'profiles',
+            'data_url': reverse('api_profile:profiles-list'),
+        }
+
+
+class AddRate(TemplateView):
+    template_name = "add_rate.html"
+
+
 class Login(TemplateView):
     template_name = "login.html"
     initial = {'key': 'value'}
