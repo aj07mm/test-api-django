@@ -14,7 +14,7 @@ services:
             - "8000:8000"
         links:
             - database
-            #- webapp
+            - webapp
         environment:
             DEBUG: "true"
             # default database
@@ -31,15 +31,15 @@ services:
             - pgdata:/var/lib/postgresql/data/
         environment:
             POSTGRES_USER: django
-    #webapp:
-    #    build:
-    #        context: .
-    #        dockerfile: ./docker_files/webapp/Dockerfile
-    #    command: node server.js
-    #    volumes:
-    #        - .:/django
-    #        - /django/node_modules
-    #    ports:
-    #        - "3000:3000"
+    webapp:
+        build:
+            context: .
+            dockerfile: ./docker_files/webapp/Dockerfile
+        command: node server.js
+        volumes:
+            - .:/django
+            - /django/node_modules
+        ports:
+            - "3000:3000"
 volumes:
     pgdata: {}

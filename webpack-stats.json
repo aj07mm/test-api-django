@@ -1,0 +1,1 @@
+{"status":"error","error":"ModuleNotFoundError","message":"Module not found: Error: Cannot resolve 'file' or 'directory' ./assets/js/apps/profiles/index.jsx in /django"}
