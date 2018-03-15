@@ -14,6 +14,5 @@ class LoginForm(forms.ModelForm):
         user = super().save(commit=False)
         if commit:
             user.save()
-            login(user)
 
         return user

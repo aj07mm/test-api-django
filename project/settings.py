@@ -158,16 +158,22 @@ MIDDLEWARE = (
     # Use GZip compression to reduce bandwidth.
     'django.middleware.gzip.GZipMiddleware',
 
+    # Local middleware.
+    #'project.middleware.UserCookieMiddleWare',
+
     # Default Django middleware.
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    #'project.middleware.SessionMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
+    #'project.middleware.AuthenticationMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
 
 )
-
-SESSION_ENGINE = "django.contrib.sessions.backends.signed_cookies"
+SESSION_COOKIE_HTTPONLY = False
+SESSION_COOKIE_NAME = 'twyla-cookie'
+#SESSION_ENGINE = "django.contrib.sessions.backends.signed_cookies"
 ########## END MIDDLEWARE CONFIGURATION
 
 

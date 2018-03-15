@@ -25,8 +25,11 @@ class Login(TemplateView):
             form.save()
             return HttpResponseRedirect('/home')
         else:
-            login(request, get_user_model().objects.filter(username=request.POST['username']).first()) # if created, log in
-            return HttpResponseRedirect('/home')
+            user = get_user_model().objects.filter(username=request.POST['username']).first()
+            login(request, user) # if created, log in
+            response = HttpResponseRedirect('/home')
+            response.set_cookie('username', user.username)
+            return response
 
         return render(request, self.template_name, {'form': form})
 
