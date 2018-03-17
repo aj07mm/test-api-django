@@ -10,6 +10,9 @@ from sys import path
 
 
 ########## PATH CONFIGURATION
+# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
 # Absolute filesystem path to the Django project directory:
 DJANGO_ROOT = dirname(abspath(__file__))
 
@@ -204,7 +207,8 @@ DJANGO_APPS = (
 THIRD_PARTY_APPS = (
     'rest_framework',
 
-    'django_extensions'
+    'django_extensions',
+    'webpack_loader',
 )
 
 LOCAL_APPS = (
@@ -334,3 +338,22 @@ AUTH_USER_MODEL = 'twyla.User'
 LOGIN_REDIRECT_URL ='/'
 LOGIN_URL = '/login'
 LOGOUT_REDIRECT_URL = '/home'
+
+# webpack
+
+WEBPACK_LOADER = {
+    'DEFAULT': {
+        'CACHE': not DEBUG,
+        'BUNDLE_DIR_NAME': 'bundles/',
+        'STATS_FILE': os.path.join(BASE_DIR, 'webpack-stats.json'),
+        'POLL_INTERVAL': 0.1,
+        'TIMEOUT': None,
+        'IGNORE': ['.+\.hot-update.js', '.+\.map']
+    }
+}
+
+WEBPACK_LOADER = {
+    'DEFAULT': {
+        'CACHE': not DEBUG
+    }
+}

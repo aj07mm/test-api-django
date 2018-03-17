@@ -1,3 +1,5 @@
 from django.contrib import admin
+from project.apps.twyla.models import Book, Rate
 
-# Register your models here.
+admin.site.register(Book)
+admin.site.register(Rate)

@@ -6,19 +6,24 @@ class Profiles extends React.Component {
 
     constructor(props){
         super(props);
-        this.state = { results: [] };
+        this.state = { results: [], errors: [], };
     }
 
     componentDidMount() {
         // get url
-        const app = document.getElementById('react-app-profiles');
+        const app = document.getElementById('react-app-rates');
         // do request
         Axios.get(app.getAttribute('data-url'))
         .then((response) => {
             this.setState({
                 results: response.data.results,
             });
-        });
+        })
+        .catch((errors) => {
+            this.setState({
+                errors: errors
+            }) 
+        })
     }
 
     render() {

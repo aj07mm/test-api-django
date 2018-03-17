@@ -7,8 +7,8 @@ from project.apps.twyla import views
 urlpatterns = (
     url(r'^$', RedirectView.as_view(url='/home')),
     url(r'^home/$', views.Home.as_view(), name='home'),
-    url(r'^add_book/$', views.AddBook.as_view(), name='add_book'),
-    url(r'^add_rate/$', views.AddRate.as_view(), name='add_rate'),
+    url(r'^books/$', views.AddBook.as_view(), name='add_book'),
+    url(r'^rates/$', views.AddRate.as_view(), name='add_rate'),
 
     # auth
     url(r'^login/?$', views.Login.as_view(), name='login'),
@@ -17,6 +17,8 @@ urlpatterns = (
     #url(r'^$', RedirectView.as_view(url='/api')),
     url(
         r'^api/',
-        include('project.apps.twyla.api.urls', namespace='api')
+        include(
+            ('project.apps.twyla.api.urls', 'twyla'), 
+            namespace='twyla_api'),
     ),
 )

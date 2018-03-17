@@ -1,9 +1,9 @@
 from rest_framework import routers
 from project.apps.twyla.api import views
 
-
+app_name = 'twyla'
 router = routers.DefaultRouter()
-router.register(r'books', views.ProfileViewSet, base_name="books")
-router.register(r'rates', views.ProfileViewSet, base_name="rates")
+router.register(r'books', views.BookViewSet, base_name="books")
+router.register(r'rates', views.RateViewSet, base_name="rates")
 
 urlpatterns = router.urls

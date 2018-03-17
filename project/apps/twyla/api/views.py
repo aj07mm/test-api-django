@@ -1,7 +1,7 @@
 from rest_framework import viewsets, mixins
 from rest_framework.permissions import IsAuthenticated
 from project.apps.twyla.api.serializers import BookSerializer, RateSerializer
-from project.apps.twyla.models import Book
+from project.apps.twyla.models import Book, Rate
 from project.pagination import BasePaginator
 
 

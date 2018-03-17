@@ -1,26 +1,41 @@
 from django.shortcuts import render
 from django.contrib.auth import login, get_user_model
 from django.http import HttpResponseRedirect
+from django.urls import reverse
 from django.views.generic import TemplateView
 from project.apps.twyla.forms import LoginForm
+
+
+class ReactView(TemplateView):
+    template_name = "react_view.html"
+
+    def get_context_data(self, **kwargs):
+        return {
+            'bundle': None,
+            'data_url': None,
+        }
 
 
 class Home(TemplateView):
     template_name = "home.html"
 
 
-class AddBook(TemplateView):
-    template_name = "add_book.html"
+class AddBook(ReactView):
 
     def get_context_data(self, **kwargs):
         return {
-            'bundle': 'profiles',
-            'data_url': reverse('api_profile:profiles-list'),
+            'bundle': 'books',
+            'data_url': reverse('twyla_api:books-list'),
         }
 
 
-class AddRate(TemplateView):
-    template_name = "add_rate.html"
+class AddRate(ReactView):
+
+    def get_context_data(self, **kwargs):
+        return {
+            'bundle': 'rates',
+            'data_url': reverse('twyla_api:rates-list'),
+        }
 
 
 class Login(TemplateView):
@@ -38,7 +53,11 @@ class Login(TemplateView):
         form = self.form_class(request.POST)
         if form.is_valid(): # if don't exist create
             form.save()
-            return HttpResponseRedirect('/home')
+            user = get_user_model().objects.filter(username=request.POST['username']).first()
+            login(request, user) # if created, log in
+            response = HttpResponseRedirect('/home')
+            response.set_cookie('username', user.username)
+            return response
         else:
             user = get_user_model().objects.filter(username=request.POST['username']).first()
             login(request, user) # if created, log in
