@@ -6,64 +6,73 @@ class RateApp extends React.Component {
 
     constructor(props){
         super(props);
-        this.state = { results: [], errors: [], };
+        this.state = { 
+            app: document.getElementById('react-app-books-review'),
+            rate: { title: null, isbn_number: null}, 
+            results: [], 
+            errors: [], 
+        };
+
+        this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     componentDidMount() {
-        // get url
-        const app = document.getElementById('react-app-books-review');
-        // do request
-        Axios.get(app.getAttribute('data-url'))
+        const app = document.getElementById('react-app-rates-review');
+    }
+
+    handleChange(event) {
+        let rate = Object.assign({}, this.state.rate);
+        rate[event.target.name] = event.target.value
+        this.setState({rate});
+    }
+
+    handleSubmit(event) {
+        // disable default form behaviour
+        event.preventDefault();
+        // make ajax request
+        Axios.post(
+            this.state.app.getAttribute('data-url-rates'),
+            this.state.rate,
+        )
         .then((response) => {
-            this.setState({
-                results: response.data.results,
+            window.location = '/home';
+        })
+        .catch((error) => {
+            this.setState({ 
+                errors: Object.keys(error.response.data).map((key, index) => {
+                    return key + ' - ' + error.response.data[key];
+                })
             });
-        })
-        .catch((errors) => {
-            this.setState({
-                errors: errors
-            }) 
-        })
+        });
+
     }
 
     render() {
-        if(this.state.results.length > 0){
-            let rows = [];
-            this.state.results.forEach((profile) => {
-                rows.push(
-                    (<tr>
-                        <td>{ profile.uuid }</td>
-                        <td>{ profile.full_name }</td>
-                        <td>{ profile.current_position }</td>
-                        <td><a href={ profile.profile_url } className="button">View profile</a></td>
-                    </tr>)
-                )
-
-            });
-
-            return (
-                <div>
-                    <table className="u-full-width">
-                        <thead>
-                            <tr>
-                                <th>uuid</th>
-                                <th>full name</th>
-                                <th>current_position</th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            { rows }
-                        </tbody>
-                    </table>
-                </div>
-            );
-        }
         return (
-            <div className="container">
-                <div className="row">
-                    <img style={{width: "50%"}} className="two-third column" src="https://upload.wikimedia.org/wikipedia/commons/b/b1/Loading_icon.gif" />
-                </div>
+            <div className="container docs-example docs-example-forms">
+                <form onSubmit={ this.handleSubmit }>
+                    <div className="row">
+                        <label htmlFor="{{ profile_form.about_you.id_for_label }}">Stars:</label>
+                        <input value={1} onChange={this.handleChange} type="checkbox" name="stars" /> 1
+                        <input value={2} onChange={this.handleChange} type="checkbox" name="stars" /> 2
+                        <input value={3} onChange={this.handleChange} type="checkbox" name="stars" /> 3 
+                        <input value={4} onChange={this.handleChange} type="checkbox" name="stars" /> 4
+                        <input value={5} onChange={this.handleChange} type="checkbox" name="stars" /> 5
+                    </div>
+                    <div className="row">
+                        <label htmlFor="{{ profile_form.about_you.id_for_label }}">Review:</label>
+                        <textarea className="u-full-width" value={this.state.rate.isbn_number} onChange={this.handleChange} type="text" name="review" />
+                    </div>
+                    <div className="row">
+                        <label htmlFor="{{ profile_form.about_you.id_for_label }}">Book:</label>
+                        <input className="u-full-width" value={this.state.rate.isbn_number} onChange={this.handleChange} type="text" name="book" />
+                    </div>
+                    <button className="u-full-width button-primary">Create</button>
+                </form>
+                <ul>
+                    { this.state.errors.length > 0 && this.state.errors.map((error, i) => <li>{ error }</li>)}
+                </ul>
             </div>
         );
     }
