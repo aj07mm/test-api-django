@@ -6,7 +6,12 @@ class BooksApp extends React.Component {
 
     constructor(props){
         super(props);
-        this.state = { isLoading: false, results: [], errors: [], };
+        this.state = { 
+            isLoading: false, 
+            results_books: [], 
+            results_rates: [], 
+            errors: [], 
+        };
     }
 
     componentDidMount() {
@@ -15,31 +20,58 @@ class BooksApp extends React.Component {
         // is loading
         this.setState({ isLoading: true })
         // do request
-        Axios.get(app.getAttribute('data-url'))
-        .then((response) => {
+        Axios.all([
+            Axios.get(app.getAttribute('data-url-books')),
+            Axios.get(app.getAttribute('data-url-rates')),
+        ])
+        .then((responses) => {
             this.setState({
-                results: response.data.results,
+                results_books: responses[0].data.results,
+                results_rates: responses[1].data.results,
                 isLoading: false,
             });
         });
     }
 
     render() {
-        let tableContent = null
-        if(this.state.results.length > 0){
+        let tableContentBooks = null
+        let tableContentRates = null
+        if(this.state.results_books.length > 0){
             let rows = [];
-            this.state.results.forEach((book) => {
+            this.state.results_books.forEach((book) => {
                 rows.push(
                     (<tr>
                         <td>{ book.id }</td>
                         <td>{ book.isbn_number }</td>
                         <td>{ book.title }</td>
-                        <td><a href={ book.book_url } className="button">Review book</a></td>
+                        <td><a href={ book.review_book_url } className="button">Review book</a></td>
                     </tr>)
                 );
             });
-            tableContent = rows;
+            tableContentBooks = rows;
+        } else {
+            tableContentBooks = <tr><td colSpan="4">Empty!</td></tr>;
         }
+        if(this.state.results_rates.length > 0){
+            let rows = [];
+            this.state.results_rates.forEach((rate) => {
+                rows.push(
+                    (<tr>
+                        <td>{ rate.id }</td>
+                        <td>{ rate.stars }</td>
+                        <td>{ rate.review }</td>
+                        <td>{ rate.book }</td>
+                    </tr>)
+                );
+            });
+            tableContentRates = rows;
+        } else {
+            tableContentRates = <tr><td colSpan="4">Empty!</td></tr>;
+        }
+
+        const loadingSpinner = (
+            <img style={{width: "50%"}} className="two-third column" src="https://upload.wikimedia.org/wikipedia/commons/b/b1/Loading_icon.gif" />
+        )
 
         return (
             <div>
@@ -55,8 +87,26 @@ class BooksApp extends React.Component {
                     <tbody>
                         { 
                             this.state.isLoading ?
-                            <img style={{width: "50%"}} className="two-third column" src="https://upload.wikimedia.org/wikipedia/commons/b/b1/Loading_icon.gif" /> :
-                            tableContent
+                            loadingSpinner :
+                            tableContentBooks
+                        }
+                    </tbody>
+                </table>
+                <br/>
+                <table className="u-full-width">
+                    <thead>
+                        <tr>
+                            <th>id</th>
+                            <th>stars</th>
+                            <th>review</th>
+                            <th>book</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        { 
+                            this.state.isLoading ?
+                            loadingSpinner :
+                            tableContentRates
                         }
                     </tbody>
                 </table>

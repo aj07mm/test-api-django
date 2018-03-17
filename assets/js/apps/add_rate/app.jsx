@@ -2,7 +2,7 @@ const React = require('react');
 import Axios from '../../helpers/Axios';
 
 
-class Profiles extends React.Component {
+class Rates extends React.Component {
 
     constructor(props){
         super(props);
@@ -11,7 +11,7 @@ class Profiles extends React.Component {
 
     componentDidMount() {
         // get url
-        const app = document.getElementById('react-app-rates');
+        const app = document.getElementById('react-app-books-review');
         // do request
         Axios.get(app.getAttribute('data-url'))
         .then((response) => {
@@ -70,4 +70,4 @@ class Profiles extends React.Component {
 }
 
 
-module.exports = Profiles
+module.exports = Rates

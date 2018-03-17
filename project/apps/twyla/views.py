@@ -16,15 +16,21 @@ class ReactView(TemplateView):
         }
 
 
-class Home(TemplateView):
-    template_name = "home.html"
-
-
-class AddBook(ReactView):
+class Home(ReactView):
 
     def get_context_data(self, **kwargs):
         return {
             'bundle': 'books',
+            'data_url_books': reverse('twyla_api:books-list'),
+            'data_url_rates': reverse('twyla_api:rates-list'),
+        }
+
+
+class BookReview(ReactView):
+
+    def get_context_data(self, **kwargs):
+        return {
+            'bundle': 'books-review',
             'data_url': reverse('twyla_api:books-list'),
         }
 

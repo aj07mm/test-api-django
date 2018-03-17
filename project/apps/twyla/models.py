@@ -10,6 +10,9 @@ class User(AbstractUser):
 class Book(models.Model):
     title = models.CharField(max_length=255, blank=False)
     isbn_number = models.CharField(max_length=13, unique=True, blank=False)
+    created_by = models.ForeignKey(
+        User, on_delete=models.CASCADE, null=False, blank=False,
+    )
 
     def __str__(self):
         return u"%s" % self.title
@@ -21,6 +24,9 @@ class Rate(models.Model):
     book = models.ForeignKey(
         Book, on_delete=models.CASCADE, null=False, blank=False,
     )
+    created_by = models.ForeignKey(
+        User, on_delete=models.CASCADE, null=False, blank=False,
+    )
 
     def __str__(self):
-        return u"%s - %s" % self.book, self.stars
+        return u"%s - %s" % (self.book, self.stars)
