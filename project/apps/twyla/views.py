@@ -12,7 +12,7 @@ class ReactView(TemplateView):
     def get_context_data(self, **kwargs):
         return {
             'bundle': None,
-            'data_url': None,
+            'data_urls': {},
         }
 
 
@@ -20,18 +20,26 @@ class Home(ReactView):
 
     def get_context_data(self, **kwargs):
         return {
+            'title': "Home",
             'bundle': 'books',
-            'data_url_books': reverse('twyla_api:books-list'),
-            'data_url_rates': reverse('twyla_api:rates-list'),
+            'data_urls': [
+                ('books', reverse('twyla_api:books-list')),
+                ('rates', reverse('twyla_api:rates-list')),
+            ]
         }
 
 
 class BookReview(ReactView):
+    title = "Book Review"
 
     def get_context_data(self, **kwargs):
         return {
+            'title': "Book Review",
             'bundle': 'books-review',
-            'data_url_books': reverse('twyla_api:books-list'),
+            'data_urls': [
+                ('books', reverse('twyla_api:books-list')),
+                ('rates', reverse('twyla_api:rates-list')),
+            ]
         }
 
 
@@ -39,8 +47,12 @@ class BookCreate(ReactView):
 
     def get_context_data(self, **kwargs):
         return {
+            'title': "Book Create",
             'bundle': 'books-create',
-            'data_url_books': reverse('twyla_api:books-list'),
+            'data_urls': [
+                ('books', reverse('twyla_api:books-list')),
+                ('rates', reverse('twyla_api:rates-list')),
+            ]
         }
 
 

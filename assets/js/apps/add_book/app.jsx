@@ -6,44 +6,65 @@ class BookApp extends React.Component {
 
     constructor(props){
         super(props);
-        this.state = { results: [], errors: [], };
+        this.state = { 
+            app: document.getElementById('react-app-books-create'),
+            book: { title: null, isbn_number: null}, 
+            results: [], 
+            errors: [], 
+        };
+
+        this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     componentDidMount() {
-        // get url
         const app = document.getElementById('react-app-books-create');
-        // do request
-        Axios.get(app.getAttribute('data-url'))
+    }
+
+    handleChange(event) {
+        let book = Object.assign({}, this.state.book);
+        book[event.target.name] = event.target.value
+        this.setState({book});
+    }
+
+    handleSubmit(event) {
+        // disable default form behaviour
+        event.preventDefault();
+        // make ajax request
+        Axios.post(
+            this.state.app.getAttribute('data-url-books'),
+            this.state.book,
+        )
         .then((response) => {
-            this.setState({
-                results: response.data.results,
+            window.location = '/home';
+        })
+        .catch((error) => {
+            this.setState({ 
+                errors: Object.keys(error.response.data).map((key, index) => {
+                    return key + ' - ' + error.response.data[key];
+                })
             });
-        })
-        .catch((errors) => {
-            this.setState({
-                errors: errors
-            }) 
-        })
+        });
+
     }
 
     render() {
-
-        const submitForm = () => {
-        }
-
         return (
             <div className="container docs-example docs-example-forms">
-                <form method="post">
+                <form onSubmit={ this.handleSubmit }>
                     <div className="row">
                         <label htmlFor="{{ profile_form.about_you.id_for_label }}">Title:</label>
-                        <input className="u-full-width" name="asd" />
+                        <input className="u-full-width" value={this.state.book.title} onChange={this.handleChange} type="text" name="title" />
                     </div>
                     <div className="row">
                         <label htmlFor="{{ profile_form.about_you.id_for_label }}">ISBN number:</label>
-                        <input className="u-full-width" name="asd" />
+                        <input className="u-full-width" value={this.state.book.isbn_number} onChange={this.handleChange} type="text" name="isbn_number" />
                     </div>
-                    <button className="u-full-width" onclick={ submitForm }>Create</button>
+                    <button className="u-full-width button-primary">Create</button>
                 </form>
+                <ul>
+                    { this.state.errors.length > 0 && this.state.errors.map((error, i) => <li>{ error }</li>)}
+                </ul>
             </div>
         );
     }

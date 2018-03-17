@@ -358,3 +358,6 @@ WEBPACK_LOADER = {
         'CACHE': not DEBUG
     }
 }
+
+
+CSRF_COOKIE_NAME = 'twyla-csrftoken-2'
