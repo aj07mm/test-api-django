@@ -172,6 +172,7 @@ MIDDLEWARE = (
     #'project.middleware.AuthenticationMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
+    'project.middleware.CurrentUserMiddleware',
 
 )
 SESSION_COOKIE_HTTPONLY = False

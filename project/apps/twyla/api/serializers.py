@@ -8,7 +8,9 @@ class BookSerializer(serializers.ModelSerializer):
 
     class Meta(object):
         model = Book
-        fields = "__all__"
+        #fields = "__all__"
+        read_only_fields = ('created_by',)
+        exclude = ('created_by',)
 
     def get_review_book_url(self, obj):
         return reverse('review_book', kwargs={'book_id': obj.id})
@@ -18,4 +20,6 @@ class RateSerializer(serializers.ModelSerializer):
 
     class Meta(object):
         model = Rate
-        fields = "__all__"
+        #fields = "__all__"
+        read_only_fields = ('created_by',)
+        exclude = ('created_by',)

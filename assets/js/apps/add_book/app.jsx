@@ -50,7 +50,7 @@ class BooksApp extends React.Component {
             });
             tableContentBooks = rows;
         } else {
-            tableContentBooks = <tr><td colSpan="4">Empty!</td></tr>;
+            tableContentBooks = <tr><td colSpan="4" style={{textAlign: "center"}}>Empty!</td></tr>;
         }
         if(this.state.results_rates.length > 0){
             let rows = [];
@@ -66,7 +66,7 @@ class BooksApp extends React.Component {
             });
             tableContentRates = rows;
         } else {
-            tableContentRates = <tr><td colSpan="4">Empty!</td></tr>;
+            tableContentRates = <tr><td colSpan="4" style={{textAlign: "center"}}>Empty!</td></tr>;
         }
 
         const loadingSpinner = (

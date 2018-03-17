@@ -34,6 +34,14 @@ class BookReview(ReactView):
             'data_url': reverse('twyla_api:books-list'),
         }
 
+class BookCreate(ReactView):
+
+    def get_context_data(self, **kwargs):
+        return {
+            'bundle': 'books-review',
+            'data_url': reverse('twyla_api:books-list'),
+        }
+
 
 class AddRate(ReactView):
 
