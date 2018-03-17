@@ -2,67 +2,122 @@ const React = require('react');
 import Axios from '../../helpers/Axios';
 
 
-class Profiles extends React.Component {
+class HomeApp extends React.Component {
 
     constructor(props){
         super(props);
-        this.state = { results: [] };
+        this.state = { 
+            isLoading: false, 
+            results_books: [], 
+            results_rates: [], 
+            errors: [], 
+        };
     }
 
     componentDidMount() {
         // get url
-        const app = document.getElementById('react-app-profiles');
+        const app = document.getElementById('react-app-books');
+        // is loading
+        this.setState({ isLoading: true })
         // do request
-        Axios.get(app.getAttribute('data-url'))
-        .then((response) => {
+        Axios.all([
+            Axios.get(app.getAttribute('data-url-books')),
+            Axios.get(app.getAttribute('data-url-rates')),
+        ])
+        .then((responses) => {
             this.setState({
-                results: response.data.results,
+                results_books: responses[0].data.results,
+                results_rates: responses[1].data.results,
+                isLoading: false,
             });
         });
     }
 
     render() {
-        if(this.state.results.length > 0){
+        let tableContentBooks = null
+        let tableContentRates = null
+        if(this.state.results_books.length > 0){
             let rows = [];
-            this.state.results.forEach((profile) => {
+            this.state.results_books.forEach((book) => {
                 rows.push(
                     (<tr>
-                        <td>{ profile.uuid }</td>
-                        <td>{ profile.full_name }</td>
-                        <td>{ profile.current_position }</td>
-                        <td><a href={ profile.profile_url } className="button">View profile</a></td>
+                        <td>{ book.id }</td>
+                        <td>{ book.isbn_number }</td>
+                        <td>{ book.title }</td>
+                        <td>{ book.created_by.username }</td>
+                        <td><a href={ book.review_book_url } className="button">Review book</a></td>
                     </tr>)
-                )
-
+                );
             });
-
-            return (
-                <div>
-                    <table className="u-full-width">
-                        <thead>
-                            <tr>
-                                <th>uuid</th>
-                                <th>full name</th>
-                                <th>current_position</th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            { rows }
-                        </tbody>
-                    </table>
-                </div>
-            );
+            tableContentBooks = rows;
+        } else {
+            tableContentBooks = <tr><td colSpan="4" style={{textAlign: "center"}}>Empty!</td></tr>;
         }
+        if(this.state.results_rates.length > 0){
+            let rows = [];
+            this.state.results_rates.forEach((rate) => {
+                rows.push(
+                    (<tr>
+                        <td>{ rate.id }</td>
+                        <td>{ rate.stars }</td>
+                        <td>{ rate.review }</td>
+                        <td>{ rate.created_by.username }</td>
+                        <td>{ rate.book }</td>
+                    </tr>)
+                );
+            });
+            tableContentRates = rows;
+        } else {
+            tableContentRates = <tr><td colSpan="4" style={{textAlign: "center"}}>Empty!</td></tr>;
+        }
+
+        const loadingSpinner = (
+            <img style={{width: "50%"}} className="two-third column" src="https://upload.wikimedia.org/wikipedia/commons/b/b1/Loading_icon.gif" />
+        )
+
         return (
-            <div className="container">
-                <div className="row">
-                    <img style={{width: "50%"}} className="two-third column" src="https://upload.wikimedia.org/wikipedia/commons/b/b1/Loading_icon.gif" />
-                </div>
+            <div>
+                <table className="u-full-width">
+                    <thead>
+                        <tr>
+                            <th>id</th>
+                            <th>isbn_number</th>
+                            <th>title</th>
+                            <th>created by</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        { 
+                            this.state.isLoading ?
+                            loadingSpinner :
+                            tableContentBooks
+                        }
+                    </tbody>
+                </table>
+                <br/>
+                <table className="u-full-width">
+                    <thead>
+                        <tr>
+                            <th>id</th>
+                            <th>stars</th>
+                            <th>review</th>
+                            <th>created by</th>
+                            <th>book</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        { 
+                            this.state.isLoading ?
+                            loadingSpinner :
+                            tableContentRates
+                        }
+                    </tbody>
+                </table>
             </div>
         );
     }
 }
 
 
-module.exports = Profiles
+module.exports = HomeApp

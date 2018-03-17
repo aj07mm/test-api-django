@@ -10,8 +10,13 @@ class User(AbstractUser):
 
 
 class FollowUserModel(models.Model):
-    created_by = models.ForeignKey(User, on_delete=models.CASCADE, null=True, editable=False, related_name='%(class)s_created')
-    #modified_by = models.ForeignKey(User, on_delete=models.CASCADE, null=True, editable=False, related_name='%(class)s_modified')
+    created_by = models.ForeignKey(
+        User, 
+        on_delete=models.CASCADE, 
+        null=True, 
+        editable=False, 
+        related_name='%(class)s_created'
+    )
 
     def save(self, *args, **kwargs):
         user = get_current_user()

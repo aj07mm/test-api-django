@@ -2,7 +2,7 @@ const React = require('react');
 import Axios from '../../helpers/Axios';
 
 
-class Rates extends React.Component {
+class RateApp extends React.Component {
 
     constructor(props){
         super(props);
@@ -70,4 +70,4 @@ class Rates extends React.Component {
 }
 
 
-module.exports = Rates
+module.exports = RateApp

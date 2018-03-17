@@ -8,10 +8,9 @@ module.exports = {
   entry: [
       'webpack-dev-server/client?http://localhost:3000',
       'webpack/hot/only-dev-server',
-      //'./assets/js/apps/home/index.jsx',
-      './assets/js/apps/add_rate/index.jsx',
+      './assets/js/apps/home/index.jsx',
       './assets/js/apps/add_book/index.jsx',
-      //'./assets/js/apps/login/index.jsx',
+      './assets/js/apps/add_rate/index.jsx',
   ],
 
   output: {
