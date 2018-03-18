@@ -6,11 +6,12 @@ class RateApp extends React.Component {
 
     constructor(props){
         super(props);
-        this.state = { 
+        this.state = {
             app: document.getElementById('react-app-books-review'),
-            rate: { title: null, isbn_number: null}, 
-            results: [], 
-            errors: [], 
+            rate: { title: null, isbn_number: null, book: null, },
+            bookOptions: [],
+            results: [],
+            errors: [],
         };
 
         this.handleChange = this.handleChange.bind(this);
@@ -19,6 +20,16 @@ class RateApp extends React.Component {
 
     componentDidMount() {
         const app = document.getElementById('react-app-rates-review');
+
+        // load books for book select
+        Axios.get(this.state.app.getAttribute('data-url-books'))
+        .then((response) => {
+            this.setState({
+                bookOptions: response.data.results.map((book) => (
+                   { 'key': book.title, 'value': book.id, }
+                ))
+            });
+        });
     }
 
     handleChange(event) {
@@ -39,7 +50,7 @@ class RateApp extends React.Component {
             window.location = '/home';
         })
         .catch((error) => {
-            this.setState({ 
+            this.setState({
                 errors: Object.keys(error.response.data).map((key, index) => {
                     return key + ' - ' + error.response.data[key];
                 })
@@ -54,11 +65,11 @@ class RateApp extends React.Component {
                 <form onSubmit={ this.handleSubmit }>
                     <div className="row">
                         <label htmlFor="{{ profile_form.about_you.id_for_label }}">Stars:</label>
-                        <input value={1} onChange={this.handleChange} type="checkbox" name="stars" /> 1
-                        <input value={2} onChange={this.handleChange} type="checkbox" name="stars" /> 2
-                        <input value={3} onChange={this.handleChange} type="checkbox" name="stars" /> 3 
-                        <input value={4} onChange={this.handleChange} type="checkbox" name="stars" /> 4
-                        <input value={5} onChange={this.handleChange} type="checkbox" name="stars" /> 5
+                        <input value={1} onChange={this.handleChange} type="checkbox" name="stars" /> 1 &nbsp;
+                        <input value={2} onChange={this.handleChange} type="checkbox" name="stars" /> 2 &nbsp;
+                        <input value={3} onChange={this.handleChange} type="checkbox" name="stars" /> 3 &nbsp;
+                        <input value={4} onChange={this.handleChange} type="checkbox" name="stars" /> 4 &nbsp;
+                        <input value={5} onChange={this.handleChange} type="checkbox" name="stars" /> 5 &nbsp;
                     </div>
                     <div className="row">
                         <label htmlFor="{{ profile_form.about_you.id_for_label }}">Review:</label>
@@ -66,7 +77,13 @@ class RateApp extends React.Component {
                     </div>
                     <div className="row">
                         <label htmlFor="{{ profile_form.about_you.id_for_label }}">Book:</label>
-                        <input className="u-full-width" value={this.state.rate.isbn_number} onChange={this.handleChange} type="text" name="book" />
+                        <select className="u-full-width" value={this.state.rate.book} onChange={this.handleChange} name="book">
+                            {
+                                this.state.bookOptions.length > 0 &&
+                                this.state.bookOptions.map((bookOption, i) => <option value={bookOption.value}>{ bookOption.key }</option>)
+                            }
+                            <option>Select one</option>
+                        </select>
                     </div>
                     <button className="u-full-width button-primary">Create</button>
                 </form>

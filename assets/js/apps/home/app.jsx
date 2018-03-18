@@ -6,11 +6,11 @@ class HomeApp extends React.Component {
 
     constructor(props){
         super(props);
-        this.state = { 
-            isLoading: false, 
-            results_books: [], 
-            results_rates: [], 
-            errors: [], 
+        this.state = {
+            isLoading: false,
+            results_books: [],
+            results_rates: [],
+            errors: [],
         };
     }
 
@@ -68,7 +68,7 @@ class HomeApp extends React.Component {
             });
             tableContentRates = rows;
         } else {
-            tableContentRates = <tr><td colSpan="4" style={{textAlign: "center"}}>Empty!</td></tr>;
+            tableContentRates = <tr><td colSpan="5" style={{textAlign: "center"}}>Empty!</td></tr>;
         }
 
         const loadingSpinner = (
@@ -88,7 +88,7 @@ class HomeApp extends React.Component {
                         </tr>
                     </thead>
                     <tbody>
-                        { 
+                        {
                             this.state.isLoading ?
                             loadingSpinner :
                             tableContentBooks
@@ -107,7 +107,7 @@ class HomeApp extends React.Component {
                         </tr>
                     </thead>
                     <tbody>
-                        { 
+                        {
                             this.state.isLoading ?
                             loadingSpinner :
                             tableContentRates
