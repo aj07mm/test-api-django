@@ -26,6 +26,7 @@ class BookSerializer(serializers.ModelSerializer):
 
 
 class RateSerializer(serializers.ModelSerializer):
+    created_by = UserSerializer(read_only=True)
 
     class Meta(object):
         model = Rate
