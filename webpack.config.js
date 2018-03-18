@@ -10,8 +10,8 @@ module.exports = {
       'webpack/hot/only-dev-server',
       './assets/js/apps/home/index.jsx',
       './assets/js/apps/book_list/index.jsx',
-      './assets/js/apps/add_book/index.jsx',
-      './assets/js/apps/add_rate/index.jsx',
+      './assets/js/apps/book_create/index.jsx',
+      './assets/js/apps/book_review/index.jsx',
   ],
 
   output: {
