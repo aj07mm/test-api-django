@@ -18,7 +18,8 @@
                         {% if user.is_authenticated %}
                             <li class="navbar-item"><a class="navbar-link" href="{% url 'logout' %}">Logout</a></li>
                             <li class="navbar-item"><a class="navbar-link" href="{% url 'home' %}">Home</a></li>
-                            <li class="navbar-item"><a class="navbar-link" href="{% url 'create_book' %}">Create book</a></li>
+                            <li class="navbar-item"><a class="navbar-link" href="{% url 'book_create' %}">Create book</a></li>
+                            <li class="navbar-item"><a class="navbar-link" href="{% url 'book_list' %}">List Books</a></li>
                         {% else %}
                             <li class="navbar-item"><a class="navbar-link" href="{% url 'login' %}">Login</a></li>
                         {% endif %}

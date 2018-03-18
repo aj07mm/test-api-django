@@ -22,7 +22,7 @@ class BookSerializer(serializers.ModelSerializer):
         read_only_fields = ('created_by',)
 
     def get_review_book_url(self, obj):
-        return reverse('review_book', kwargs={'book_id': obj.id})
+        return reverse('book_review', kwargs={'book_id': obj.id})
 
 
 class RateSerializer(serializers.ModelSerializer):
