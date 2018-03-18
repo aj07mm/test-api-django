@@ -77,6 +77,7 @@ class HomeApp extends React.Component {
 
         return (
             <div>
+                <h5>My Books</h5>
                 <table className="u-full-width">
                     <thead>
                         <tr>
@@ -96,6 +97,7 @@ class HomeApp extends React.Component {
                     </tbody>
                 </table>
                 <br/>
+                <h5>My Reviews and reviews others wrote for my books</h5>
                 <table className="u-full-width">
                     <thead>
                         <tr>
