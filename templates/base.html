@@ -16,7 +16,7 @@
                 <div class="container docs-example">
                     <ul class="navbar-list">
                         {% if user.is_authenticated %}
-                            <li class="navbar-item"><a class="navbar-link" href="{% url 'logout' %}">Logout</a></li>
+                            <li class="navbar-item"><a class="navbar-link" href="{% url 'logout' %}">Logout({{ user.username }})</a></li>
                             <li class="navbar-item"><a class="navbar-link" href="{% url 'home' %}">Home</a></li>
                             <li class="navbar-item"><a class="navbar-link" href="{% url 'book_create' %}">Create book</a></li>
                             <li class="navbar-item"><a class="navbar-link" href="{% url 'book_list' %}">List Books</a></li>
