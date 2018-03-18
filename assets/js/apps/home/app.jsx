@@ -51,7 +51,7 @@ class HomeApp extends React.Component {
             });
             tableContentBooks = rows;
         } else {
-            tableContentBooks = <tr><td colSpan="4" style={{textAlign: "center"}}>Empty!</td></tr>;
+            tableContentBooks = <tr><td colSpan="5" style={{textAlign: "center"}}>Empty!</td></tr>;
         }
         if(this.state.results_rates.length > 0){
             let rows = [];
