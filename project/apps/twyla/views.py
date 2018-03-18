@@ -29,6 +29,19 @@ class Home(ReactView):
         }
 
 
+class BookList(ReactView):
+
+    def get_context_data(self, **kwargs):
+        return {
+            'title': "Book List",
+            'bundle': 'books-list',
+            'data_urls': [
+                ('books', reverse('twyla_api:books-list')),
+                ('rates', reverse('twyla_api:rates-list')),
+            ]
+        }
+
+
 class BookReview(ReactView):
     title = "Book Review"
 

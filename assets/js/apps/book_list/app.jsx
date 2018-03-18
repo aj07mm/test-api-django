@@ -2,7 +2,7 @@ const React = require('react');
 import Axios from '../../helpers/Axios';
 
 
-class HomeApp extends React.Component {
+class BookListApp extends React.Component {
 
     constructor(props){
         super(props);
@@ -16,15 +16,12 @@ class HomeApp extends React.Component {
 
     componentDidMount() {
         // get url
-        const app = document.getElementById('react-app-books');
+        const app = document.getElementById('react-app-books-list');
         // is loading
         this.setState({ isLoading: true })
         // do request
         Axios.all([
-            Axios.get(
-                app.getAttribute('data-url-books') +
-                `?created_by__id=${app.getAttribute('current-user-id')}`
-            ),
+            Axios.get(app.getAttribute('data-url-books')),
             Axios.get(app.getAttribute('data-url-rates')),
         ])
         .then((responses) => {
@@ -37,8 +34,8 @@ class HomeApp extends React.Component {
     }
 
     render() {
-        let tableContentBooks = null
-        let tableContentRates = null
+        let tableContentBooks = null;
+        let tableContentRates = null;
         if(this.state.results_books.length > 0){
             let rows = [];
             this.state.results_books.forEach((book) => {
@@ -99,30 +96,10 @@ class HomeApp extends React.Component {
                         }
                     </tbody>
                 </table>
-                <br/>
-                <h5>My Reviews and reviews others wrote for my books</h5>
-                <table className="u-full-width">
-                    <thead>
-                        <tr>
-                            <th>id</th>
-                            <th>stars</th>
-                            <th>review</th>
-                            <th>created by</th>
-                            <th>book</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {
-                            this.state.isLoading ?
-                            loadingSpinner :
-                            tableContentRates
-                        }
-                    </tbody>
-                </table>
             </div>
         );
     }
 }
 
 
-module.exports = HomeApp
+module.exports = BookListApp

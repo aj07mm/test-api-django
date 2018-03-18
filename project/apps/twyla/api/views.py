@@ -16,9 +16,12 @@ class BookViewSet(
     pagination_class = BasePaginator
 
     def get_queryset(self):
-        return Book.objects.filter(
-            created_by=self.request.user
-        ).order_by('-id')
+        created_by__id = self.request.GET.get('created_by__id', None)
+        if created_by__id:
+            return Book.objects.filter(
+                created_by__id=created_by__id,
+            ).order_by('-id')
+        return Book.objects.all()
 
 
 class RateViewSet(

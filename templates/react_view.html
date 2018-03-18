@@ -6,8 +6,9 @@
     <div class="row">
         <h5 style="text-align: center;">{{ title }}</h5>
     </div>
-    <div 
+    <div
         id="react-app-{{ bundle }}"
+        current-user-id="{{ user.id }}"
         {% for key, value in data_urls %}
             data-url-{{ key }}="{{ value }}"
         {% endfor %}

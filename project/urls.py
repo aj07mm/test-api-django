@@ -8,6 +8,7 @@ from django.contrib.auth.decorators import login_required
 urlpatterns = (
     url(r'^$', RedirectView.as_view(url='/home')),
     url(r'^home/$', login_required(views.Home.as_view()), name='home'),
+    url(r'^books/list$', login_required(views.BookList.as_view()), name='list_book'),
     url(r'^books/$', login_required(views.BookCreate.as_view()), name='create_book'),
     url(r'^books/(?P<book_id>\w+)/review$', login_required(views.BookReview.as_view()), name='review_book'),
     #url(r'^rates/$', views.AddRate.as_view(), name='add_rate'),
@@ -20,7 +21,7 @@ urlpatterns = (
     url(
         r'^api/',
         include(
-            ('project.apps.twyla.api.urls', 'twyla'), 
+            ('project.apps.twyla.api.urls', 'twyla'),
             namespace='twyla_api'),
     ),
 )
