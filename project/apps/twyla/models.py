@@ -4,7 +4,6 @@ from django.core.validators import MaxValueValidator
 from project.apps.twyla.utils import get_current_user
 
 
-
 class User(AbstractUser):
     pass
 

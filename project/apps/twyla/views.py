@@ -95,21 +95,22 @@ class Login(TemplateView):
     def post(self, request, *args, **kwargs):
         self._redirect_if_authenticated(request)
         form = self.form_class(request.POST)
-        if form.is_valid(): # if don't exist create
+        if form.is_valid():
             form.save()
-            user = get_user_model().objects.filter(username=request.POST['username']).first()
-            login(request, user) # if created, log in
-            response = HttpResponseRedirect('/home')
-            response.set_cookie('username', user.username)
-            return response
+            return self._perform_login(request)
         else:
-            user = get_user_model().objects.filter(username=request.POST['username']).first()
-            login(request, user) # if created, log in
-            response = HttpResponseRedirect('/home')
-            response.set_cookie('username', user.username)
-            return response
+            return self._perform_login(request)
 
         return render(request, self.template_name, {'form': form})
+
+    def _perform_login(request):
+            user = get_user_model().objects.filter(
+                username=request.POST['username'],
+            ).first()
+            login(request, user)
+            response = HttpResponseRedirect('/home')
+            response.set_cookie('username', user.username)
+            return response
 
     def _redirect_if_authenticated(self, request):
         if request.user.is_authenticated:

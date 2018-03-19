@@ -3,7 +3,6 @@ from django.urls import reverse
 from project.apps.twyla.models import Book, Rate, User
 
 
-
 class UserSerializer(serializers.ModelSerializer):
 
     class Meta(object):
@@ -25,11 +24,17 @@ class BookSerializer(serializers.ModelSerializer):
         return reverse('book_review', kwargs={'book_id': obj.id})
 
 
-class RateSerializer(serializers.ModelSerializer):
+class RateSerializerBase(serializers.ModelSerializer):
     created_by = UserSerializer(read_only=True)
-    #book = serializers.CharField(source="book.title")
 
     class Meta(object):
         model = Rate
         fields = "__all__"
         read_only_fields = ('created_by',)
+    
+
+class RateCreateSerializer(RateSerializerBase):
+    pass
+
+class RateListSerializer(RateSerializerBase):
+    book = serializers.CharField(source="book.title", read_only=True)

@@ -1,7 +1,3 @@
-import json
-import pytest
-from datetime import datetime
-
 from rest_framework import status
 from rest_framework.test import APITestCase
 
@@ -90,7 +86,7 @@ class APIViewsetTests(APITestCase):
         results = response.data['results']
         assert results[0]['stars'] == 1
         assert results[0]['review'] == 'foo1'
-        assert results[0]['book'] == self.book.id
+        assert results[0]['book'] == self.book.title
         assert response.status_code == status.HTTP_200_OK
 
     def test_list_rate_of_mine_and_others_having_only_other(self):
@@ -112,7 +108,7 @@ class APIViewsetTests(APITestCase):
         results = response.data['results']
         assert results[0]['stars'] == 1
         assert results[0]['review'] == 'foo1'
-        assert results[0]['book'] == self.book_i_wrote.id
+        assert results[0]['book'] == self.book_i_wrote.title
         assert response.status_code == status.HTTP_200_OK
 
     def test_list_rate_of_mine_and_others_having_both(self):
@@ -141,10 +137,10 @@ class APIViewsetTests(APITestCase):
         # rate of other
         assert results[0]['stars'] == 4
         assert results[0]['review'] == 'bar123'
-        assert results[0]['book'] == self.book_i_wrote.id
+        assert results[0]['book'] == self.book_i_wrote.title
         # rate of mine
         assert results[1]['stars'] == 2
         assert results[1]['review'] == 'foo123'
-        assert results[1]['book'] == self.book.id
+        assert results[1]['book'] == self.book.title
 
         assert response.status_code == status.HTTP_200_OK

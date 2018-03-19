@@ -8,9 +8,21 @@ from django.contrib.auth.decorators import login_required
 urlpatterns = (
     url(r'^$', RedirectView.as_view(url='/home')),
     url(r'^home/$', login_required(views.Home.as_view()), name='home'),
-    url(r'^books/list$', login_required(views.BookList.as_view()), name='book_list'),
-    url(r'^books/$', login_required(views.BookCreate.as_view()), name='book_create'),
-    url(r'^books/(?P<book_id>\w+)/review$', login_required(views.BookReview.as_view()), name='book_review'),
+    url(
+        r'^books/list$',
+        login_required(views.BookList.as_view()),
+        name='book_list',
+    ),
+    url(
+        r'^books/$',
+        login_required(views.BookCreate.as_view()),
+        name='book_create',
+    ),
+    url(
+        r'^books/(?P<book_id>\w+)/review$',
+        login_required(views.BookReview.as_view()),
+        name='book_review',
+    ),
 
     # auth
     url(r'^login/?$', views.Login.as_view(), name='login'),
