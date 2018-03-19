@@ -11,10 +11,3 @@ Running tests:
 ```
 make test
 ```
-
-login:
-
-	username: admin
-	password: 123
-
----
