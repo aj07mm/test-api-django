@@ -29,11 +29,6 @@ class APIViewsetTests(APITestCase):
             title="Foo",
             isbn_number="123",
         )
-        self.rate = factories.RateFactory.create(
-            stars=5,
-            review="asdasdasdasd",
-            book=self.book,
-        )
 
     def test_create_book(self):
         response = self.client.post(

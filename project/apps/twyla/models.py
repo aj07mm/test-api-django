@@ -20,9 +20,9 @@ class FollowUserModel(models.Model):
     )
 
     def save(self, *args, **kwargs):
-        #user = get_current_user()
-        #if user and user.is_authenticated:
-        #    self.created_by = user
+        user = get_current_user()
+        if user and user.is_authenticated:
+            self.created_by = user
         super(FollowUserModel, self).save(*args, **kwargs)
 
     class Meta:
