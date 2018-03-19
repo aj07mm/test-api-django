@@ -34,6 +34,10 @@ class RateViewSet(
     pagination_class = BasePaginator
 
     def get_queryset(self):
+        '''
+            reviews she wrote,
+            in addition to the reviews others wrote for the books she added
+        '''
         return Rate.objects.filter(
             Q(created_by=self.request.user) |
             Q(
