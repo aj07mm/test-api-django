@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.core.validators import MaxValueValidator
 from project.apps.twyla.utils import get_current_user
+from project.validators import ISBNValidator
 
 
 class User(AbstractUser):
@@ -30,7 +31,12 @@ class FollowUserModel(models.Model):
 
 class Book(FollowUserModel):
     title = models.CharField(max_length=255, blank=False)
-    isbn_number = models.CharField(max_length=13, unique=True, blank=False)
+    isbn_number = models.CharField(
+        max_length=13, 
+        unique=True, 
+        blank=False,
+        validators=[ISBNValidator]
+    )
 
     def __str__(self):
         return u"%s" % self.title
