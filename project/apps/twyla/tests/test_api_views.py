@@ -23,7 +23,7 @@ class APIViewsetTests(APITestCase):
         self.client.force_login(self.user)
         self.book = factories.BookFactory.create(
             title="Foo",
-            isbn_number="123",
+            isbn_number="0-9752298-0-X",
         )
 
     def test_create_book(self):
@@ -31,12 +31,12 @@ class APIViewsetTests(APITestCase):
             '/api/books/',
             {
                 'title': 'The Book',
-                'isbn_number': '1234567',
+                'isbn_number': '85-359-0277-5',
             },
             format='json',
         )
         assert response.data['title'] == 'The Book'
-        assert response.data['isbn_number'] == '1234567'
+        assert response.data['isbn_number'] == '85-359-0277-5'
         assert response.status_code == status.HTTP_201_CREATED
 
     def test_list_book(self):
