@@ -8,7 +8,7 @@ class BookReviewApp extends React.Component {
         super(props);
         this.state = {
             app: document.getElementById('react-app-books-review'),
-            rate: { title: null, isbn_number: null, book: null, },
+            rate: { title: null, isbn_number: null, book: window.location.pathname.split('/')[2], },
             bookOptions: [],
             results: [],
             errors: [],
