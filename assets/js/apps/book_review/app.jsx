@@ -6,9 +6,14 @@ class BookReviewApp extends React.Component {
 
     constructor(props){
         super(props);
+        const app = document.getElementById('react-app-books-review');
         this.state = {
-            app: document.getElementById('react-app-books-review'),
-            rate: { title: null, isbn_number: null, book: window.location.pathname.split('/')[2], },
+            app: app,
+            rate: {
+                title: null,
+                isbn_number: null,
+                book: app.getAttribute('data-attr-book-id'),
+            },
             bookOptions: [],
             results: [],
             errors: [],
@@ -74,16 +79,6 @@ class BookReviewApp extends React.Component {
                     <div className="row">
                         <label htmlFor="{{ profile_form.about_you.id_for_label }}">Review:</label>
                         <textarea className="u-full-width" value={this.state.rate.isbn_number} onChange={this.handleChange} type="text" name="review" />
-                    </div>
-                    <div className="row">
-                        <label htmlFor="{{ profile_form.about_you.id_for_label }}">Book:</label>
-                        <select className="u-full-width" value={this.state.rate.book} onChange={this.handleChange} name="book">
-                            {
-                                this.state.bookOptions.length > 0 &&
-                                this.state.bookOptions.map((bookOption, i) => <option value={bookOption.value}>{ bookOption.key }</option>)
-                            }
-                            <option>Select one</option>
-                        </select>
                     </div>
                     <button className="u-full-width button-primary">Create</button>
                 </form>

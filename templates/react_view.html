@@ -12,6 +12,9 @@
         {% for key, value in data_urls %}
             data-url-{{ key }}="{{ value }}"
         {% endfor %}
+        {% for key, value in data_attrs %}
+            data-attr-{{ key }}="{{ value }}"
+        {% endfor %}
     ></div>
 {% endblock %}
 

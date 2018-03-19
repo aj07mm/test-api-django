@@ -13,6 +13,7 @@ class ReactView(TemplateView):
         return {
             'bundle': None,
             'data_urls': {},
+            'data_attrs': {},
         }
 
 
@@ -52,6 +53,9 @@ class BookReview(ReactView):
             'data_urls': [
                 ('books', reverse('twyla_api:books-list')),
                 ('rates', reverse('twyla_api:rates-list')),
+            ],
+            'data_attrs': [
+                ('book-id', kwargs.get('book_id', None)),
             ]
         }
 

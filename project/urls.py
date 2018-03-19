@@ -16,7 +16,6 @@ urlpatterns = (
     url(r'^login/?$', views.Login.as_view(), name='login'),
     url(r'^logout/$', auth_views.logout, name='logout'),
     url(r'^admin/', admin.site.urls),
-    #url(r'^$', RedirectView.as_view(url='/api')),
     url(
         r'^api/',
         include(
