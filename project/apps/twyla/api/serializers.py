@@ -31,10 +31,11 @@ class RateSerializerBase(serializers.ModelSerializer):
         model = Rate
         fields = "__all__"
         read_only_fields = ('created_by',)
-    
+
 
 class RateCreateSerializer(RateSerializerBase):
     pass
+
 
 class RateListSerializer(RateSerializerBase):
     book = serializers.CharField(source="book.title", read_only=True)

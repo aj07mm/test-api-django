@@ -44,7 +44,6 @@ class RateViewSet(
             )
         ).order_by('-id')
 
-
     def get_serializer_class(self):
         if self.action == 'create':
             return serializers.RateCreateSerializer
