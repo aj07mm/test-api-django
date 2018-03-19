@@ -13,7 +13,7 @@ def ISBNValidator(raw_isbn):
 
     if len(isbn_to_check) != 10 and len(isbn_to_check) != 13:
         raise ValidationError(_(u'Invalid ISBN: Wrong length'))
-    
+
     if not isbn.is_valid(isbn_to_check):
         raise ValidationError(_(u'Invalid ISBN: Failed checksum'))
 
