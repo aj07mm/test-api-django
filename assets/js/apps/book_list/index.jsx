@@ -1,9 +1,9 @@
-var React = require('react')
-var App = require('./app');
+const React = require('react');
+const App = require('./app');
 
 
-const domElement = document.getElementById('react-app-books-list')
+const domElement = document.getElementById('react-app-books-list');
 
 if (domElement) {
-    React.render(<App/>, domElement);
+  React.render(<App />, domElement);
 }

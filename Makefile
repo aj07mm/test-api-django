@@ -13,6 +13,8 @@ stop:
 test:
 	#docker-compose run django pytest
 	docker-compose run django python manage.py test
+eslint:
+	./node_modules/.bin/eslint --env browser "assets/js/**"
 dump_fixture:
 	docker-compose run django python manage.py dumpdata --natural-foreign --natural-primary -e contenttypes -e auth.Permission --indent 4 --format=json > fixtures/initial_data.json
 manage:
