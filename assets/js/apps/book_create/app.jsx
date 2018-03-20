@@ -3,7 +3,7 @@ import Axios from '../../helpers/Axios';
 const React = require('react');
 
 
-class BookApp extends React.Component {
+class BookCreateApp extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -63,4 +63,4 @@ class BookApp extends React.Component {
 }
 
 
-module.exports = BookApp;
+module.exports = BookCreateApp;
