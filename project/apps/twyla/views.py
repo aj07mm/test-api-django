@@ -84,12 +84,11 @@ class AddRate(ReactView):
 
 class Login(TemplateView):
     template_name = "login.html"
-    initial = {'key': 'value'}
     form_class = LoginForm
 
     def get(self, request, *args, **kwargs):
         self._redirect_if_authenticated(request)
-        form = self.form_class(initial=self.initial)
+        form = self.form_class()
         return render(request, self.template_name, {'form': form})
 
     def post(self, request, *args, **kwargs):
@@ -97,20 +96,16 @@ class Login(TemplateView):
         form = self.form_class(request.POST)
         if form.is_valid():
             form.save()
-            return self._perform_login(request)
-        else:
-            return self._perform_login(request)
-
-        return render(request, self.template_name, {'form': form})
+        return self._perform_login(request)
 
     def _perform_login(self, request):
-            user = get_user_model().objects.filter(
-                username=request.POST['username'],
-            ).first()
-            login(request, user)
-            response = HttpResponseRedirect('/home')
-            response.set_cookie('twyla-username', user.username)
-            return response
+        user = get_user_model().objects.filter(
+            username=request.POST['username'],
+        ).first()
+        login(request, user)
+        response = HttpResponseRedirect('/home')
+        response.set_cookie('twyla-username', user.username)
+        return response
 
     def _redirect_if_authenticated(self, request):
         if request.user.is_authenticated:
