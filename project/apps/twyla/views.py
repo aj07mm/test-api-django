@@ -96,12 +96,16 @@ class Login(TemplateView):
         form = self.form_class(request.POST)
         if form.is_valid():
             form.save()
-        return self._perform_login(request)
 
-    def _perform_login(self, request):
-        user = get_user_model().objects.filter(
-            username=request.POST['username'],
-        ).first()
+        user = self._get_user(request.POST['username'])
+        if user:
+            return self._perform_login(request, user)
+        return render(request, self.template_name, {'form': form})
+
+    def _get_user(self, username):
+        return get_user_model().objects.filter(username=username).first()
+
+    def _perform_login(self, request, user):
         login(request, user)
         response = HttpResponseRedirect('/home')
         response.set_cookie('twyla-username', user.username)
