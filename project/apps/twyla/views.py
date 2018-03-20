@@ -73,15 +73,6 @@ class BookCreate(ReactView):
         }
 
 
-class AddRate(ReactView):
-
-    def get_context_data(self, **kwargs):
-        return {
-            'bundle': 'rates',
-            'data_url': reverse('twyla_api:rates-list'),
-        }
-
-
 class Login(TemplateView):
     template_name = "login.html"
     form_class = LoginForm
