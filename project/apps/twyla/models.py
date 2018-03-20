@@ -32,7 +32,7 @@ class FollowUserModel(models.Model):
 class Book(FollowUserModel):
     title = models.CharField(max_length=255, blank=False)
     isbn_number = models.CharField(
-        max_length=13,
+        max_length=17,
         unique=True,
         blank=False,
         validators=[ISBNValidator]
