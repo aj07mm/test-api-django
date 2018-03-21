@@ -1,8 +1,13 @@
-import Axios from '../../helpers/Axios';
-import React from 'react'
+const React = require('react');
+import A from './foo'
 
-export default React.createClass({
+
+const MyComponent = React.createClass({
   render() {
-    return <div>Hello, React Router!</div>
+    return (
+        <div>xasdasd</div>
+    )
   }
 })
+
+module.exports = MyComponent
