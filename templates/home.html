@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <h5 style="text-align: center;">{{ title }}</h5>
+    </div>
+    <div
+        id="react-app"
+        current-user-id="{{ user.id }}"
+        {% for key, value in data_urls %}
+            data-url-{{ key }}="{{ value }}"
+        {% endfor %}
+        {% for key, value in data_attrs %}
+            data-attr-{{ key }}="{{ value }}"
+        {% endfor %}
+    ></div>
+{% endblock %}
+

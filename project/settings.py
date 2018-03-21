@@ -196,7 +196,8 @@ DJANGO_APPS = (
 THIRD_PARTY_APPS = (
     'rest_framework',
 
-    'django_extensions'
+    'django_extensions',
+    'webpack_loader',
 )
 
 LOCAL_APPS = (

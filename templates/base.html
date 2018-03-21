@@ -1,0 +1,38 @@
+{% load staticfiles %}
+{% load render_bundle from webpack_loader %}
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>{% block title %}Twyla{% endblock %}</title>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css" rel="stylesheet" type="text/css">
+        <link href="{% static 'css/main.css' %}" rel="stylesheet" type="text/css">
+    </head>
+    <body>
+        <header>
+            <h1 style="text-align:center">Twyla</h1>
+            <nav class="navbar">
+                <div class="container docs-example">
+                    <ul class="navbar-list">
+                        {% if user.is_authenticated %}
+                            <li class="navbar-item"><a class="navbar-link" href="{% url 'logout' %}">Logout({{ user.username }})</a></li>
+                        {% else %}
+                            <li class="navbar-item"><a class="navbar-link" href="{% url 'login' %}">Login</a></li>
+                            <li class="navbar-item"><a class="navbar-link" href="{% url 'signup' %}">Signup</a></li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </nav>
+        </header>
+        <main class="container">
+            <br>
+            {% block content %}
+            {% endblock %}
+        </main>
+        <footer>
+            <hr>
+        </footer>
+        {% render_bundle 'main' %}
+    </body>
+</html>
