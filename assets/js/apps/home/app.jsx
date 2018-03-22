@@ -1,13 +1,36 @@
-const React = require('react');
-import A from './foo'
+import React, {  Component } from 'react';
+import { connect } from 'react-redux';
+import { ConnectedRouter, BrowserRouter, routerReducer, routerMiddleware, push } from 'react-router-redux'
 
+import { activateGeod, closeGeod } from './reducers';
 
-const MyComponent = React.createClass({
+import { Route } from 'react-router'
+
+class App extends Component {
+
+  constructor(props) {
+    super(props);
+  }
+
   render() {
     return (
-        <div>xasdasd</div>
+        <div>
+            <div>xas asd dasd</div>
+        </div>
     )
   }
-})
 
-module.exports = MyComponent
+}
+
+// AppContainer.js
+const mapStateToProps = (state, ownProps) => ({  
+  geod: state.geod,
+});
+
+const mapDispatchToProps = {  
+  activateGeod,
+  closeGeod,
+};
+
+
+module.exports = connect(mapStateToProps, mapDispatchToProps)(App)

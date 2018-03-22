@@ -5,11 +5,13 @@ import { createStore, combineReducers, applyMiddleware } from 'redux'
 import { Provider } from 'react-redux'
 
 import createHistory from 'history/createBrowserHistory'
+import { Route } from 'react-router'
 
 import { ConnectedRouter, BrowserRouter, routerReducer, routerMiddleware, push } from 'react-router-redux'
 
-import { Router, Route, IndexRoute, browserHistory } from 'react-router'
 import { reducers } from './reducers' // Or wherever you keep your reducers
+
+import { Link, browserHistory } from 'react-router'
 // Create a history of your choosing (we're using a browser history in this case)
 const history = createHistory()
 
@@ -31,16 +33,17 @@ const store = createStore(
 // Now you can dispatch navigation actions from anywhere!
 // store.dispatch(push('/foo'))
 
+
+    //<ConnectedRouter history={history}>
+    //    <Route exact path="/" component={App}/>
+    //    <Route path="/about" component={App}/>
+    //    <Route path="/topics" component={App}/>
+    //</ConnectedRouter>
+
 ReactDOM.render(
   <Provider store={store}>
     <div>
-        <Router history={browserHistory}>
-            <Route path="/" component={App}>
-                <IndexRoute component={App}/>
-                <Route path="foo" component={App}/>
-                <Route path="bar" component={App}/>
-            </Route>
-        </Router>
+        <Link to="/"></Link>
     </div>
   </Provider>,
   document.getElementById('react-app')
