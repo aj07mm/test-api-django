@@ -28,8 +28,11 @@ export const reducers = combineReducers({
 
 // store.js
 export function configureStore(initialState = {}) {  
-  return createStore(reducers, initialState);
+  return createStore(
+    reducers, 
+    initialState,
+    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+  );
 };
 
 export const store = configureStore(); 
-export const foo = '123';

@@ -16,7 +16,8 @@ const history = createHistory()
 // Build the middleware for intercepting and dispatching navigation actions
 const middleware = routerMiddleware(history)
 
-import App from './app';
+import App from './components/App';
+import Foo from './components/Foo';
 
 // Add the reducer to your store on the `router` key
 // Also apply our middleware for navigating
@@ -36,8 +37,7 @@ ReactDOM.render(
     <div>
         <Router history={browserHistory}>
             <Route path="/" component={App}>
-                <IndexRoute component={App}/>
-                <Route path="foo" component={App}/>
+                <Route path="foo" component={Foo}/>
                 <Route path="bar" component={App}/>
             </Route>
         </Router>

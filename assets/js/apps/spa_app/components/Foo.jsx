@@ -2,11 +2,11 @@ import React, {  Component } from 'react';
 import { connect } from 'react-redux';
 import { ConnectedRouter, BrowserRouter, routerReducer, routerMiddleware, push } from 'react-router-redux'
 
-import { activateGeod, closeGeod } from './reducers';
+import { activateGeod, closeGeod } from '../reducers';
 
 import { Route } from 'react-router'
 
-class App extends Component {
+class Foo extends Component {
 
   constructor(props) {
     super(props);
@@ -15,14 +15,14 @@ class App extends Component {
   render() {
     return (
         <div>
-            <div>xas asd dasd</div>
+            <div>Foo</div>
         </div>
     )
   }
 
 }
 
-// AppContainer.js
+// FooContainer.js
 const mapStateToProps = (state, ownProps) => ({  
   geod: state.geod,
 });
@@ -33,4 +33,4 @@ const mapDispatchToProps = {
 };
 
 
-module.exports = connect(mapStateToProps, mapDispatchToProps)(App)
+module.exports = connect(mapStateToProps, mapDispatchToProps)(Foo)
