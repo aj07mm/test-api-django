@@ -1,0 +1,24 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>{% block title %}The Data Incubator{% endblock %}</title>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css" rel="stylesheet" type="text/css">
+        <link href="{% static 'css/main.css' %}" rel="stylesheet" type="text/css">
+    </head>
+    <body>
+        <header>
+            <h1 style="text-align:center">The Data Incubator</h1>
+        </header>
+        <main class="container">
+            <br>
+            {% block content %}
+            {% endblock %}
+        </main>
+        <footer>
+            <hr>
+        </footer>
+    </body>
+</html>

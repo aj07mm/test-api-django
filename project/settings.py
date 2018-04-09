@@ -200,7 +200,7 @@ THIRD_PARTY_APPS = (
 )
 
 LOCAL_APPS = (
-    #'project.apps.foobar', <-- your app here
+    'project.apps.data_incubator',
 )
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps

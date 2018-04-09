@@ -39,3 +39,6 @@ celerybeat-schedule.*
 
 # js
 node_modules/*
+
+# media
+project/media/*
