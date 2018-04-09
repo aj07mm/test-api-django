@@ -36,3 +36,6 @@ debug.log
 celerybeat-schedule
 celerybeat-schedule.*
 .pytest_cache
+
+# js
+node_modules/*
