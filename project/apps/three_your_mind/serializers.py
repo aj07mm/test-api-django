@@ -33,6 +33,15 @@ class NestingSerializer(serializers.Serializer):
 
         return ret
 
+    def get_nested_values(self, obj, nested_values=None):
+        if nested_values is None:
+            nested_values = []
+        if isinstance(obj, dict):
+            for key, value in obj.items():
+                nested_values += self.get_nested_values(value)
+            return nested_values
+        return [obj]
+
     def replace_values(self, obj, current_value_sign, next_value):
         new_obj = OrderedDict()
             
@@ -46,13 +55,30 @@ class NestingSerializer(serializers.Serializer):
         return obj
 
     def to_representation(self, instance):
-        ret = self.get_to_representation(instance)
-        ret = { **ret, **self.Meta.nesting }
-
+        ret = { **self.Meta.nesting }
         fields = self._readable_fields
+        nested_values = self.get_nested_values(ret)
+
         # replace fields
         for field in fields:
-            ret = self.replace_values(ret, field.field_name, field.get_attribute(instance))
+            if field.field_name not in nested_values:
+                try:
+                    attribute = field.get_attribute(instance)
+                except SkipField:
+                    continue
+
+                # We skip `to_representation` for `None` values so that fields do
+                # not have to explicitly deal with that case.
+                #
+                # For related fields with `use_pk_only_optimization` we need to
+                # resolve the pk value.
+                check_for_none = attribute.pk if isinstance(attribute, PKOnlyObject) else attribute
+                if check_for_none is None:
+                    ret[field.field_name] = None
+                else:
+                    ret[field.field_name] = field.to_representation(attribute)
+            else:
+                ret = self.replace_values(ret, field.field_name, field.get_attribute(instance))
         # replace nesting
         for key, value in self.Meta.nesting.items():
             ret = self.replace_values(ret, key, value)
