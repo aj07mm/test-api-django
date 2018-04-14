@@ -200,7 +200,7 @@ THIRD_PARTY_APPS = (
 )
 
 LOCAL_APPS = (
-    #'project.apps.foobar', <-- your app here
+    'project.apps.three_your_mind',
 )
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
