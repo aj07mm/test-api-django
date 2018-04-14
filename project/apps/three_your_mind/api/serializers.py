@@ -86,26 +86,7 @@ class NestingSerializer(serializers.Serializer):
         return ret
     
 
-class Printer1stLevelSerializer(NestingSerializer, serializers.ModelSerializer):
-
-    class Meta:
-        model = Printer
-        fields = [
-            "name",
-            "min_production_time",
-            "max_production_time"
-        ]
-        # The ‘nesting’ option should be used by the
-        nesting = {
-            "productionTime": {
-                "minimum" : "min_production_time",
-                "maximum" : "max_production_time",
-            },
-        }
-
-
-
-class Printer2ndLevelSerializer(NestingSerializer, serializers.ModelSerializer):
+class PrinterSerializer(NestingSerializer, serializers.ModelSerializer):
 
     class Meta:
         model = Printer
@@ -122,27 +103,4 @@ class Printer2ndLevelSerializer(NestingSerializer, serializers.ModelSerializer):
                 "medium" : "bar",
             },
             "bar": 123
-        }
-
-
-class Printer3ndLevelSerializer(NestingSerializer, serializers.ModelSerializer):
-
-    class Meta:
-        model = Printer
-        fields = [
-            "name",
-            "min_production_time",
-            "max_production_time"
-        ]
-        # The ‘nesting’ option should be used by the
-        nesting = {
-            "productionTime": {
-                "minimum" : "min_production_time",
-                "maximum" : "max_production_time",
-                "medium" : "bar",
-            },
-            "bar": {
-                "mirror_xyz": "xyz",
-            },
-            "xyz": 123,
         }

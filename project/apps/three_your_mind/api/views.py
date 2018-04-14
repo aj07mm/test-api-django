@@ -11,7 +11,7 @@ class BookViewSet(
     viewsets.GenericViewSet,
 ):
     # permission_classes = (IsAuthenticated,)
-    serializer_class = serializers.Printer1stLevelSerializer
+    serializer_class = serializers.PrinterSerializer
     pagination_class = BasePaginator
 
     def get_queryset(self):
