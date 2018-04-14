@@ -4,8 +4,18 @@ from project.apps.three_your_mind import serializers
 
 from . import factories
 
+class ApiSetup:
 
-class APIViewsetTests(APITestCase):
+    @classmethod
+    def setUpTestData(cls):
+        cls.printer = factories.PrinterFactory.create(
+            name="asdasd",
+            min_production_time=123,
+            max_production_time=123,
+        )
+
+
+class APIViewsetTests(ApiSetup, APITestCase):
 
     """
     Testing viewset default methods
@@ -16,34 +26,8 @@ class APIViewsetTests(APITestCase):
             retrieve(self, request, pk=None)
             update(self, request, pk=None)
             partial_update(self, request, pk=None)
-            destroy(self, request, pk=None)
-
-
-    class PrinterSerializer(NestingSerializer, serializers.ModelSerializer):
-
-        class Meta:
-            model = Printer
-            fields = [
-                "name",
-                "min_production_time",
-                "max_production_time"
-            ]
-            # The ‘nesting’ option should be used by the
-            nesting = {
-                "productionTime": {
-                    "minimum" : "min_production_time",
-                    "maximum" : "max_production_time",
-                },
-            }
 
     """
-    @classmethod
-    def setUpTestData(cls):
-        cls.printer = factories.PrinterFactory.create(
-            name="asdasd",
-            min_production_time=123,
-            max_production_time=123,
-        )
 
     def test_create_printer(self):
         response = self.client.post(
@@ -61,9 +45,25 @@ class APIViewsetTests(APITestCase):
         assert response.status_code == status.HTTP_201_CREATED
 
 
+class APISerializers(ApiSetup, APITestCase):
+    """
+        class PrinterSerializer(NestingSerializer, serializers.ModelSerializer):
 
-    # ---- test serializers --- #
-
+            class Meta:
+                model = Printer
+                fields = [
+                    "name",
+                    "min_production_time",
+                    "max_production_time"
+                ]
+                # The ‘nesting’ option should be used by the
+                nesting = {
+                    "productionTime": {
+                        "minimum" : "min_production_time",
+                        "maximum" : "max_production_time",
+                    },
+                }
+    """
 
     def test_create_printer_with_1_level_nested_dict(self):
         serializer = serializers.Printer1stLevelSerializer(instance=self.printer)
