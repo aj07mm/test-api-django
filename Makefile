@@ -1,10 +1,10 @@
 setup:
 	docker-compose build
-	docker-compose up -d
+	docker-compose up
 	docker-compose run django python manage.py migrate
 	docker-compose restart
 run:
-	docker-compose up -d
+	docker-compose up
 restart:
 	docker-compose restart
 stop:
