@@ -17,6 +17,7 @@ services:
             #- webapp
         environment:
             DEBUG: "true"
+            SECRET_KEY: "dev-secret-key-change-in-production"
             # default database
             DATABASE_NAME: django
             DATABASE_USER: django

@@ -1,12 +1,9 @@
 """Common settings and globals."""
 
-
-from datetime import timedelta
 import os
-from os.path import abspath, basename, dirname, join, normpath
+from os.path import abspath, dirname, join, normpath
+from pathlib import Path
 from sys import path
-
-# from djcelery import setup_loader
 
 
 ########## PATH CONFIGURATION
@@ -27,10 +24,7 @@ path.append(DJANGO_ROOT)
 
 ########## DEBUG CONFIGURATION
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#debug
-DEBUG = True if os.getenv('DEBUG') == 'true' else False
-
-# See: https://docs.djangoproject.com/en/dev/ref/settings/#template-debug
-TEMPLATE_DEBUG = DEBUG
+DEBUG = os.getenv('DEBUG', 'false').lower() == 'true'
 
 TEST_RUNNER = 'django.test.runner.DiscoverRunner'
 ########## END DEBUG CONFIGURATION
@@ -115,7 +109,9 @@ STATICFILES_FINDERS = (
 
 ########## SECRET CONFIGURATION
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#secret-key
-SECRET_KEY = os.getenv('SECRET_KEY', '8lu*6g0lg)9z!ba+a$ehk)xt)x%rxgb$i1&amp;022shmi1jcgihb*')
+SECRET_KEY = os.getenv('SECRET_KEY')
+if not SECRET_KEY:
+    raise ValueError('SECRET_KEY environment variable must be set')
 ########## END SECRET CONFIGURATION
 
 
@@ -254,70 +250,30 @@ LOGGING = {
 ########## END LOGGING CONFIGURATION
 
 
-########## CELERY CONFIGURATION
-# See: http://celery.readthedocs.org/en/latest/configuration.html#celery-task-result-expires
-# CELERY_TASK_RESULT_EXPIRES = timedelta(minutes=30)
-
-# # See: http://docs.celeryproject.org/en/master/configuration.html#std:setting-CELERY_CHORD_PROPAGATES
-# CELERY_CHORD_PROPAGATES = True
-
-# # See: http://celery.github.com/celery/django/
-# setup_loader()
-########## END CELERY CONFIGURATION
-
-
 ########## WSGI CONFIGURATION
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#wsgi-application
 WSGI_APPLICATION = 'wsgi.application'
 ########## END WSGI CONFIGURATION
 
 
-########## COMPRESSION CONFIGURATION
-# # See: http://django_compressor.readthedocs.org/en/latest/settings/#django.conf.settings.COMPRESS_ENABLED
-# COMPRESS_ENABLED = True
+########## SECURITY CONFIGURATION
+# SECURITY WARNING: In production, set ALLOWED_HOSTS to your domain
+ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', '*').split(',')
 
-# # See: http://django-compressor.readthedocs.org/en/latest/settings/#django.conf.settings.COMPRESS_CSS_HASHING_METHOD
-# COMPRESS_CSS_HASHING_METHOD = 'content'
+# Security settings for production
+if not DEBUG:
+    SECURE_SSL_REDIRECT = True
+    SESSION_COOKIE_SECURE = True
+    CSRF_COOKIE_SECURE = True
+    SECURE_BROWSER_XSS_FILTER = True
+    SECURE_CONTENT_TYPE_NOSNIFF = True
+    X_FRAME_OPTIONS = 'DENY'
+    SECURE_HSTS_SECONDS = 31536000
+    SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+    SECURE_HSTS_PRELOAD = True
+########## END SECURITY CONFIGURATION
 
-# # See: http://django_compressor.readthedocs.org/en/latest/settings/#django.conf.settings.COMPRESS_CSS_FILTERS
-# COMPRESS_CSS_FILTERS = [
-#     'compressor.filters.template.TemplateFilter',
-# ]
-
-# # See: http://django_compressor.readthedocs.org/en/latest/settings/#django.conf.settings.COMPRESS_JS_FILTERS
-# COMPRESS_JS_FILTERS = [
-#     'compressor.filters.template.TemplateFilter',
-# ]
-########## END COMPRESSION CONFIGURATION
-
-
-
-########## CORS
-CORS_ORIGIN_WHITELIST = (
-    '*'
-)
-########## END CORS CONFIGURATION
-
-########## EMAIL CONFIGURATION
-# See: https://docs.djangoproject.com/en/dev/ref/settings/#email-backend
-# EMAIL_BACKEND = 'django_mailgun.MailgunBackend'
-# MAILGUN_ACCESS_KEY = 'key-c2ebfec48050f7c36bd1a9f8f59fd2e3'
-# MAILGUN_SERVER_NAME = 'mg.mappostcards.com'
-########## END EMAIL CONFIGURATION
-
-
-# ########## SSL CONFIGURATION
-#
-# Disable by load balancer
-#
-# SESSION_COOKIE_SECURE = True
-# SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTOCOL', 'https')
-# CSRF_COOKIE_SECURE = True
-# ########## END SSL CONFIGURATION
-
-
-# ########## SITE CONFIGURATION
-# SITE_URL = "https://localhost"
-# ########## END SITE CONFIGURATION
-
-ALLOWED_HOSTS = ['*']
+########## DEFAULT PRIMARY KEY FIELD TYPE
+# https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+########## END DEFAULT PRIMARY KEY FIELD TYPE
